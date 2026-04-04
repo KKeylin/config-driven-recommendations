@@ -1,0 +1,13 @@
+# Claude Code context
+CLAUDE.md
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.turbo/
+
+# Env files
+.env
+.env.local

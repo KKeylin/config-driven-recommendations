@@ -50,6 +50,7 @@ testimonials-widget/
 - [ ] Populate with real testimonials data
 - [ ] Deploy to Vercel (live demo link in README)
 - [ ] Polish UI — animations, responsive layout
+- [ ] Tooltip on endorsement weight badge (level + yearsExperience of the author)
 
 ### Iteration 3 — Module Federation remote
 - [ ] `apps/mf-remote` — Webpack 5 MF remote entry

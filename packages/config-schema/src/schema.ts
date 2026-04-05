@@ -5,6 +5,10 @@ export const PersonSchema = z.object({
   title: z.string(),
   avatarUrl: z.string().url().optional(),
   linkedinUrl: z.string().url().optional(),
+  currentRole: z.object({
+    title: z.string(),
+    company: z.string(),
+  }).optional(),
 });
 
 export const EndorsementWeightSchema = z.object({

@@ -9,6 +9,10 @@ export interface Person {
   title: string;
   avatarUrl?: string;
   linkedinUrl?: string;
+  currentRole?: {
+    title: string;
+    company: string;
+  };
 }
 
 export type TestimonialSource =

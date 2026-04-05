@@ -1,6 +1,10 @@
 # Claude Code context
 CLAUDE.md
 
+# IDE
+.idea/
+.vscode/
+
 # Dependencies
 node_modules/
 

@@ -1,6 +1,8 @@
 # config-driven-testimonials
 
-> **Work in progress** — currently at Iteration 1 (core packages). See [roadmap](#roadmap) below.
+> **Work in progress** — currently at Iteration 2. See [roadmap](#roadmap) below.
+
+**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)**
 
 A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.ts` — no code changes needed beyond the config.
 
@@ -110,7 +112,7 @@ config-driven-testimonials/
 ## Roadmap
 
 - [x] **Iteration 1** — Turborepo monorepo, TypeScript config schema, Zod validation, React component, unit tests
-- [ ] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, deploy to Vercel
+- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-testimonials-demo.vercel.app/)
 - [ ] **Iteration 3** — Webpack 5 Module Federation remote entry
 - [ ] **Iteration 4** — Publish to npm, GitHub Actions CI/CD
 

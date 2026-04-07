@@ -24,6 +24,7 @@ const config: TestimonialConfig = {
       associatedRole: {
         company: 'RBC',
         period: '2021–2024',
+        type: 'employment',
       },
       weight: { level: 'manager' },
     },
@@ -40,6 +41,7 @@ const config: TestimonialConfig = {
       associatedRole: {
         company: 'RBC',
         period: '2021–2024',
+        type: 'employment',
       },
     },
   ],
@@ -64,11 +66,11 @@ describe('TestimonialsWidget', () => {
 
   it('renders testimonial text', () => {
     render(<TestimonialsWidget config={config} />);
-    expect(screen.getByText('Kostya is an exceptional engineer.')).toBeDefined();
+    expect(screen.getByText(/Kostya is an exceptional engineer\./)).toBeDefined();
   });
 
   it('renders reference-letter source label', () => {
     render(<TestimonialsWidget config={config} />);
-    expect(screen.getByText('Reference letter available upon request')).toBeDefined();
+    expect(screen.getByText('Source of recommendation: reference letter available upon request')).toBeDefined();
   });
 });

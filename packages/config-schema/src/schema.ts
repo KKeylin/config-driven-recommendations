@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const PersonSchema = z.object({
   name: z.string(),
   title: z.string(),
-  avatarUrl: z.string().url().optional(),
+  avatarUrl: z.string().optional(),
   linkedinUrl: z.string().url().optional(),
   currentRole: z.object({
     title: z.string(),
@@ -12,7 +12,7 @@ export const PersonSchema = z.object({
 });
 
 export const EndorsementWeightSchema = z.object({
-  level: z.enum(['report', 'mentee', 'peer', 'lead', 'manager', 'director', 'vp', 'c-level']),
+  level: z.enum(['report', 'mentee', 'colleague', 'lead', 'manager', 'director', 'vp', 'c-level']),
   yearsExperience: z.number().int().nonnegative().optional(),
 });
 
@@ -22,6 +22,8 @@ export const TestimonialSourceSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('verbal'), contactAvailable: z.boolean().optional() }),
 ]);
 
+export const AssociatedRoleTypeSchema = z.enum(['employment', 'contract', 'education', 'side-project']);
+
 export const TestimonialSchema = z.object({
   id: z.string(),
   author: PersonSchema,
@@ -29,9 +31,12 @@ export const TestimonialSchema = z.object({
   relationship: z.string(),
   date: z.string(),
   source: TestimonialSourceSchema,
+  recommendationUrl: z.string().url().optional(),
   associatedRole: z.object({
     company: z.string(),
     period: z.string(),
+    type: AssociatedRoleTypeSchema,
+    project: z.string().optional(),
   }),
   weight: EndorsementWeightSchema.optional(),
 });
@@ -40,6 +45,10 @@ export const ThemeConfigSchema = z.object({
   variant: z.enum(['cards', 'timeline', 'masonry']),
   colorScheme: z.enum(['light', 'dark', 'auto']).optional(),
   accentColor: z.string().optional(),
+  timeline: z.object({
+    groupBy: z.enum(['type', 'company']).optional(),
+    include: z.array(AssociatedRoleTypeSchema).optional(),
+  }).optional(),
 });
 
 export const TestimonialConfigSchema = z.object({

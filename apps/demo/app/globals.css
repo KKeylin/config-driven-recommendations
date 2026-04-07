@@ -26,6 +26,40 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.tw-reserved-badge {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(33px));
+  transition: transform 300ms ease-out;
+  white-space: nowrap;
+}
+
+[data-testid="testimonial-card"]:hover .tw-reserved-badge {
+  transform: translateX(-50%) translateY(calc(100%)) translateY(calc(-8px));
+}
+
+.tw-reserved-badge-years {
+  display: block;
+  max-height: 0;
+  overflow: hidden;
+  text-align: center;
+  transition: max-height 300ms ease-out;
+}
+
+[data-testid="testimonial-card"]:hover .tw-reserved-badge-years {
+  max-height: 1.25rem;
+}
+
+.tw-reserved-avatar {
+  border-radius: 50px;
+  transition: border-radius 400ms ease-out;
+}
+
+[data-testid="testimonial-card"]:hover .tw-reserved-avatar {
+  border-radius: 1rem;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

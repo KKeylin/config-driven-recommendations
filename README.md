@@ -1,4 +1,4 @@
-# config-driven-testimonials
+# config-driven-recommendations
 
 > **Work in progress** — Iteration 2 complete, Iteration 3 (Module Federation) next. See [roadmap](#roadmap) below.
 

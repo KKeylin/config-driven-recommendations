@@ -53,6 +53,10 @@ testimonials-widget/
 - [x] Tooltip on endorsement weight badge (level + yearsExperience of the author)
 - [x] Avatar support — rendered in card with deterministic-color initials fallback
 - [x] Author LinkedIn URLs — `recommendationUrl` (given-recommendations tab) with fallback to `author.linkedinUrl`
+- [x] Endorsement weight badge — absolute positioned under avatar, expands on hover to reveal `yearsExperience`
+- [x] Signature row — date (left) + author name italic (right) between quote and footer
+- [x] `classPrefix` prop — all elements get semantic CSS classes (`t-card`, `t-text`, etc.), prefix is configurable; `tw-reserved-*` classes are stable internal hooks immune to prefix changes
+- [x] `peer` renamed to `colleague` in endorsement weight levels
 
 ### Iteration 3 — Module Federation remote
 - [ ] `apps/mf-remote` — Webpack 5 MF remote entry

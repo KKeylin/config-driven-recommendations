@@ -1,6 +1,11 @@
 import type { Testimonial, TestimonialSource, EndorsementWeight } from '@config-driven-testimonials/config-schema';
 import type { TestimonialsWidgetProps } from './TestimonialsWidget.types';
 
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
 function resolveSourceUrl(testimonial: Testimonial): string | undefined {
   if (testimonial.recommendationUrl) return testimonial.recommendationUrl;
   if (testimonial.author.linkedinUrl) return testimonial.author.linkedinUrl;
@@ -15,14 +20,14 @@ function formatSourceLabel(source: TestimonialSource): string {
 }
 
 const levelColors: Record<EndorsementWeight['level'], string> = {
-  'report':   'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
-  'mentee':   'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
-  'peer':     'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
-  'lead':     'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-  'manager':  'bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400',
-  'director': 'bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
-  'vp':       'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400',
-  'c-level':  'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  'report':    'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
+  'mentee':    'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
+  'colleague': 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
+  'lead':      'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+  'manager':   'bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400',
+  'director':  'bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
+  'vp':        'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+  'c-level':   'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
 };
 
 const initialsColors = [
@@ -40,52 +45,53 @@ function getInitialsColor(name: string): string {
   return initialsColors[hash % initialsColors.length] ?? initialsColors[0] ?? '';
 }
 
-function Avatar({ name, avatarUrl }: { name: string; avatarUrl?: string }): React.ReactElement {
+function Avatar({ name, avatarUrl, p }: { name: string; avatarUrl?: string; p: string }): React.ReactElement {
   if (avatarUrl) {
     return (
       <img
         src={avatarUrl}
         alt={name}
-        className="h-22 w-22 rounded-full object-cover ring-2 ring-zinc-100 dark:ring-zinc-800"
+        className={`${p}-avatar tw-reserved-avatar h-22 w-22 object-cover ring-2 ring-zinc-100 dark:ring-zinc-800`}
       />
     );
   }
   const initials = name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div className={`flex h-22 w-22 items-center justify-center rounded-full text-lg font-semibold ring-2 ring-zinc-100 dark:ring-zinc-800 ${getInitialsColor(name)}`}>
+    <div className={`${p}-avatar tw-reserved-avatar flex h-22 w-22 items-center justify-center text-lg font-semibold ring-2 ring-zinc-100 dark:ring-zinc-800 ${getInitialsColor(name)}`}>
       {initials}
     </div>
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }): React.ReactElement {
+function TestimonialCard({ testimonial, p }: { testimonial: Testimonial; p: string }): React.ReactElement {
   const sourceLabel = formatSourceLabel(testimonial.source);
   const sourceUrl = resolveSourceUrl(testimonial);
   const { author } = testimonial;
 
   return (
-    <div data-testid="testimonial-card" className="flex flex-col gap-5 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:shadow-zinc-900/50">
-      <p className="text-base leading-7 text-zinc-600 dark:text-zinc-300">
+    <div data-testid="testimonial-card" className={`${p}-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md [@media(hover:hover)]:bg-zinc-50 [@media(hover:hover)]:hover:bg-white dark:bg-zinc-900 dark:hover:shadow-zinc-900/50`}>
+      <p className={`${p}-text text-base leading-7 text-zinc-600 [@media(hover:hover)]:group-hover:text-zinc-900 dark:text-zinc-300`}>
         &ldquo;{testimonial.text}&rdquo;
       </p>
+      <div className={`${p}-signature flex items-center justify-between`}>
+        <span className="text-xs text-zinc-400 dark:text-zinc-500">{formatDate(testimonial.date)}</span>
+        <span className="text-sm italic text-zinc-400 dark:text-zinc-500">— {author.name}</span>
+      </div>
       <div className="flex items-start gap-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
-        <div className="flex shrink-0 flex-col items-center gap-2">
+        <div className="relative shrink-0">
           {author.linkedinUrl ? (
             <a href={author.linkedinUrl} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
-              <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} />
+              <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
             </a>
           ) : (
-            <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} />
+            <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
           )}
           {testimonial.weight && (
-            <div className="group relative">
-              <span className={`inline-flex cursor-default items-center rounded-full px-2 py-0.5 text-xs font-medium ${levelColors[testimonial.weight.level]}`}>
-                {testimonial.weight.level.charAt(0).toUpperCase() + testimonial.weight.level.slice(1)}
-              </span>
-              <div className="pointer-events-none absolute bottom-full left-1/2 mb-1.5 hidden -translate-x-1/2 whitespace-nowrap rounded-md bg-zinc-800 px-2.5 py-1 text-xs text-white shadow-md group-hover:block dark:bg-zinc-700">
-                {testimonial.weight.level.charAt(0).toUpperCase() + testimonial.weight.level.slice(1)}
-                {testimonial.weight.yearsExperience !== undefined && ` · ${testimonial.weight.yearsExperience} yrs exp`}
-              </div>
+            <div className={`${p}-badge tw-reserved-badge inline-flex flex-col items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${levelColors[testimonial.weight.level]}`}>
+              <span>{testimonial.weight.level.charAt(0).toUpperCase() + testimonial.weight.level.slice(1)}</span>
+              {testimonial.weight.yearsExperience !== undefined && (
+                <span className={`${p}-badge-years tw-reserved-badge-years`}>{testimonial.weight.yearsExperience} yrs exp</span>
+              )}
             </div>
           )}
         </div>
@@ -95,24 +101,24 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }): React.R
               href={author.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-zinc-900 hover:underline dark:text-zinc-100"
+              className={`${p}-author-name font-semibold text-zinc-900 dark:text-zinc-100`}
             >
               {author.name}
             </a>
           ) : (
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
+            <span className={`${p}-author-name font-semibold text-zinc-900 dark:text-zinc-100`}>
               {author.name}
             </span>
           )}
-          <span className="text-sm text-zinc-500 dark:text-zinc-400">
+          <span className={`${p}-author-title text-sm text-zinc-500 dark:text-zinc-400`}>
             {author.title}
           </span>
           {author.currentRole && (
-            <span className="text-sm text-zinc-400 dark:text-zinc-500">
+            <span className={`${p}-author-role text-sm text-zinc-400 dark:text-zinc-500`}>
               Now: {author.currentRole.title} at {author.currentRole.company}
             </span>
           )}
-          <span className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
+          <span className={`${p}-meta mt-1 text-xs text-zinc-400 dark:text-zinc-500`}>
             {testimonial.relationship} · {testimonial.associatedRole.company}, {testimonial.associatedRole.period}
           </span>
           <div className="mt-2 flex items-center gap-2">
@@ -121,12 +127,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }): React.R
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-medium text-blue-600 hover:underline dark:text-blue-400"
+                className={`${p}-source inline-flex items-center gap-1 rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800`}
               >
                 {sourceLabel} ↗
               </a>
             ) : (
-              <span className="text-xs text-zinc-400 dark:text-zinc-500">
+              <span className={`${p}-source text-xs text-zinc-400 dark:text-zinc-500`}>
                 {sourceLabel}
               </span>
             )}
@@ -137,9 +143,10 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }): React.R
   );
 }
 
-export function TestimonialsWidget({ config }: TestimonialsWidgetProps): React.ReactElement {
+export function TestimonialsWidget({ config, classPrefix = 't' }: TestimonialsWidgetProps): React.ReactElement {
+  const p = classPrefix;
   return (
-    <div data-testid="testimonials-widget" className="mx-auto max-w-3xl">
+    <div data-testid="testimonials-widget" className={`${p}-widget mx-auto max-w-3xl`}>
       <div className="mb-10 text-center">
         <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100">
           {config.author.name}
@@ -152,7 +159,7 @@ export function TestimonialsWidget({ config }: TestimonialsWidgetProps): React.R
             href={config.author.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2 inline-block text-sm font-medium text-blue-600 hover:underline dark:text-blue-400"
+            className="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400"
           >
             LinkedIn Profile ↗
           </a>
@@ -167,7 +174,7 @@ export function TestimonialsWidget({ config }: TestimonialsWidgetProps): React.R
               animationDelay: `${index * 0.06}s`,
             }}
           >
-            <TestimonialCard testimonial={testimonial} />
+            <TestimonialCard testimonial={testimonial} p={p} />
           </li>
         ))}
       </ul>

@@ -39,7 +39,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/manoj-sharma-32967a68/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'EPAM', period: '2025' },
-      weight: { level: 'peer', yearsExperience: 8 },
+      weight: { level: 'colleague', yearsExperience: 8 },
     },
     {
       id: '8',
@@ -64,7 +64,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/pavlo-vynohradov/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'Litslink', period: '2018–2020' },
-      weight: { level: 'peer' },
+      weight: { level: 'colleague' },
     },
     {
       id: '7',
@@ -87,7 +87,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/jeffqi/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'RBC', period: '2022–2024' },
-      weight: { level: 'peer', yearsExperience:  18},
+      weight: { level: 'colleague', yearsExperience:  18},
     },
     {
       id: '6',
@@ -104,7 +104,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/ivan-kvitka-78a293175/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'Trinetix', period: '2020' },
-      weight: { level: 'peer' },
+      weight: { level: 'colleague' },
     },
     {
       id: '5',
@@ -137,7 +137,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/kalpesh-b-patel/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'Avatria via Varteq', period: '2021' },
-      weight: { level: 'peer' },
+      weight: { level: 'colleague' },
     },
     {
       id: '3',
@@ -171,7 +171,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/makalish/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'Arnit', period: '2017–2018' },
-      weight: { level: 'peer', yearsExperience: 4 },
+      weight: { level: 'colleague', yearsExperience: 4 },
     },
     {
       id: '1',
@@ -187,7 +187,7 @@ const config: TestimonialConfig = {
       source: { type: 'linkedin', url: 'https://www.linkedin.com/in/konstantin-keylin/details/recommendations/' },
       recommendationUrl: 'https://www.linkedin.com/in/dmytro-honcharov-web/details/recommendations/?detailScreenTabIndex=1',
       associatedRole: { company: 'Arnit', period: '2017–2018' },
-      weight: { level: 'peer', yearsExperience: 4 },
+      weight: { level: 'colleague', yearsExperience: 4 },
     },
   ],
 };

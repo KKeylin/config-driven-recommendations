@@ -35,7 +35,7 @@ export interface Testimonial {
   weight?: EndorsementWeight;      // seniority signal
 }
 export interface EndorsementWeight {
-  level: 'report' | 'mentee' | 'peer' | 'lead' | 'manager' | 'director' | 'vp' | 'c-level';
+  level: 'report' | 'mentee' | 'colleague' | 'lead' | 'manager' | 'director' | 'vp' | 'c-level';
   yearsExperience?: number;
 }
 

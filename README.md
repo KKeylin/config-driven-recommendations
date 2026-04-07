@@ -59,6 +59,9 @@ const config: TestimonialConfig = {
 
 export default function App() {
   return <TestimonialsWidget config={config} />;
+  // custom class prefix:
+  // return <TestimonialsWidget config={config} classPrefix="my" />;
+  // → classes become: my-card, my-text, my-avatar, my-badge, etc.
 }
 ```
 
@@ -80,7 +83,34 @@ Each testimonial has a `source` field that reflects how the recommendation can b
 
 The optional `weight` field signals the seniority of the person who gave the recommendation:
 
-`report` · `mentee` · `peer` · `lead` · `manager` · `director` · `vp` · `c-level`
+`report` · `mentee` · `colleague` · `lead` · `manager` · `director` · `vp` · `c-level`
+
+---
+
+## CSS customization
+
+Every key element has a semantic CSS class for easy overrides. Default prefix is `t`, configurable via `classPrefix` prop:
+
+| Class | Element |
+|---|---|
+| `t-widget` | Outer container |
+| `t-card` | Testimonial card |
+| `t-text` | Quote text |
+| `t-signature` | Date + author name row |
+| `t-author-name` | Author name |
+| `t-author-title` | Author title |
+| `t-author-role` | Author current role |
+| `t-meta` | Relationship · company, period |
+| `t-source` | Source of recommendation button |
+| `t-avatar` | Avatar image or initials |
+| `t-badge` | Endorsement weight badge |
+| `t-badge-years` | Years of experience line in badge |
+
+```css
+/* example override */
+.t-card { border-radius: 0; }
+.t-text { font-size: 1.1rem; }
+```
 
 ---
 

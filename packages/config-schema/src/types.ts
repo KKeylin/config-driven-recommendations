@@ -31,6 +31,8 @@ export interface Testimonial {
   associatedRole: {                // which job this relates to
     company: string;
     period: string;
+    type: AssociatedRoleType;
+    project?: string;              // specific product/team within the company
   };
   weight?: EndorsementWeight;      // seniority signal
 }
@@ -39,8 +41,14 @@ export interface EndorsementWeight {
   yearsExperience?: number;
 }
 
+export type AssociatedRoleType = 'employment' | 'contract' | 'education' | 'side-project';
+
 export interface ThemeConfig {
   variant: 'cards' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
+  timeline?: {
+    groupBy?: 'type' | 'company';
+    include?: AssociatedRoleType[];
+  };
 }

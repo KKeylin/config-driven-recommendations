@@ -58,27 +58,28 @@ testimonials-widget/
 - [x] `classPrefix` prop — all elements get semantic CSS classes (`t-card`, `t-text`, etc.), prefix is configurable; `tw-reserved-*` classes are stable internal hooks immune to prefix changes
 - [x] `peer` renamed to `colleague` in endorsement weight levels
 
-### Iteration 3 — Module Federation remote
+### Iteration 3 — Config Editor
+- [ ] `packages/editor` — new package, exports `TestimonialsEditor` React component
+- [ ] Form UI for editing `author`, `testimonials[]`, and `theme`
+- [ ] Avatar upload: `<input type="file">` → resize to 128×128 via canvas → store as base64; no external dependencies
+- [ ] Import: load `.json` → Zod validation → populate form (with clear per-field error messages)
+- [ ] Export: form state → download `.json`
+- [ ] `apps/demo` — `/editor` route: split-screen layout (form left, live `TestimonialsWidget` preview right)
+- [ ] Drag & drop reordering via native HTML5 Drag and Drop API, no dependencies
+
+### Iteration 4 — Module Federation remote
 - [ ] `apps/mf-remote` — Webpack 5 MF remote entry
 - [ ] Expose `TestimonialsWidget` as MF remote
 - [ ] Document how to consume from a host app
 
-### Iteration 4 — npm publish
+### Iteration 5 — npm publish
 - [ ] Publish `@kKeylin/testimonials-widget` to npm
 - [ ] README with usage examples and config reference
 - [ ] GitHub Actions CI/CD
 
-### Iteration 5 — Visual config builder (admin UI)
-- [ ] `/admin` route in demo app — hidden from public, toggle via hotkey or URL
-- [ ] Form UI for adding/editing testimonials (no JSON editing)
-- [ ] Drag & drop reordering of cards
-- [ ] Export to `testimonials.config.ts` format
-- [ ] Demonstrates DX thinking — the tool eats its own dog food
-
-### Iteration 6 — Grouped / timeline view + avatar caching
+### Iteration 6 — Grouped / timeline view
 - [ ] `theme.variant: 'timeline'` — group testimonials by company with collapsible sections
 - [ ] Toggle between `cards` (flat list) and `timeline` (grouped by associatedRole.company + period)
-- [ ] Avatar caching via `next/image` — Next.js handles optimization and caching, no dependency on external URL availability
 
 ---
 
@@ -86,41 +87,56 @@ testimonials-widget/
 
 ```typescript
 export interface TestimonialConfig {
-  author: Person
-  testimonials: Testimonial[]
-  theme?: ThemeConfig
+  author: Person;
+  testimonials: Testimonial[];
+  theme?: ThemeConfig;
 }
 
 export interface Person {
-  name: string
-  title: string
-  avatarUrl?: string
-  linkedinUrl?: string
+  name: string;
+  title: string;
+  avatarUrl?: string;        // URL or base64 (data:image/jpeg;base64,...)
+  linkedinUrl?: string;
+  currentRole?: { title: string; company: string };
 }
 
+export type AssociatedRoleType = 'employment' | 'contract' | 'education' | 'side-project';
+
 export interface Testimonial {
-  id: string
-  author: Person                  // who wrote the recommendation
-  text: string
-  relationship: string            // e.g. "Managed Kostya at RBC"
-  date: string
-  linkedinUrl?: string            // direct link to the recommendation
-  associatedRole: {               // which job this relates to
-    company: string
-    period: string
-  }
-  weight?: EndorsementWeight      // seniority signal
+  id: string;
+  author: Person;
+  text: string;
+  relationship: string;            // e.g. "Managed Kostya at RBC"
+  date: string;
+  source: TestimonialSource;
+  recommendationUrl?: string;      // direct link to given-recommendations on author's profile
+  associatedRole: {
+    company: string;
+    period: string;
+    type: AssociatedRoleType;      // used for timeline grouping and filtering
+    project?: string;              // specific product/team within the company
+  };
+  weight?: EndorsementWeight;
 }
 
 export interface EndorsementWeight {
-  level: 'peer' | 'lead' | 'manager' | 'director' | 'vp' | 'c-level'
-  yearsExperience?: number
+  level: 'report' | 'mentee' | 'colleague' | 'lead' | 'manager' | 'director' | 'vp' | 'c-level';
+  yearsExperience?: number;
 }
 
+export type TestimonialSource =
+  | { type: 'linkedin'; url: string }
+  | { type: 'reference-letter'; available: true }
+  | { type: 'verbal'; contactAvailable?: boolean };
+
 export interface ThemeConfig {
-  variant: 'cards' | 'timeline' | 'masonry'
-  colorScheme?: 'light' | 'dark' | 'auto'
-  accentColor?: string
+  variant: 'cards' | 'timeline' | 'masonry';
+  colorScheme?: 'light' | 'dark' | 'auto';
+  accentColor?: string;
+  timeline?: {
+    groupBy?: 'type' | 'company';
+    include?: AssociatedRoleType[];  // filter: show only these role types
+  };
 }
 ```
 

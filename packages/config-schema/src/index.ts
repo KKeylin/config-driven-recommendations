@@ -4,6 +4,7 @@ export type {
   Testimonial,
   TestimonialSource,
   EndorsementWeight,
+  AssociatedRoleType,
   ThemeConfig,
 } from './types';
 
@@ -11,6 +12,7 @@ export {
   PersonSchema,
   EndorsementWeightSchema,
   TestimonialSourceSchema,
+  AssociatedRoleTypeSchema,
   TestimonialSchema,
   ThemeConfigSchema,
   TestimonialConfigSchema,

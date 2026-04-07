@@ -21,6 +21,7 @@ const validConfig = {
       associatedRole: {
         company: 'RBC',
         period: '2021–2024',
+        type: 'employment',
       },
       weight: { level: 'manager' },
     },
@@ -46,6 +47,25 @@ describe('TestimonialConfigSchema', () => {
     expect(result.success).toBe(false);
   });
 
+  it('rejects invalid associatedRole type', () => {
+    const invalid = structuredClone(validConfig);
+    (invalid.testimonials[0]!.associatedRole as never as { type: string }).type = 'freelance';
+    const result = TestimonialConfigSchema.safeParse(invalid);
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts associatedRole with optional project field', () => {
+    const config = structuredClone(validConfig);
+    config.testimonials[0]!.associatedRole = {
+      company: 'RBC',
+      period: '2021–2024',
+      type: 'contract',
+      project: 'Capital Markets Platform',
+    };
+    const result = TestimonialConfigSchema.safeParse(config);
+    expect(result.success).toBe(true);
+  });
+
   it('rejects linkedin source without url', () => {
     const invalid = structuredClone(validConfig);
     invalid.testimonials[0]!.source = { type: 'linkedin' } as never;
@@ -63,6 +83,13 @@ describe('TestimonialConfigSchema', () => {
   it('accepts verbal source without contactAvailable', () => {
     const config = structuredClone(validConfig);
     config.testimonials[0]!.source = { type: 'verbal' };
+    const result = TestimonialConfigSchema.safeParse(config);
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts avatarUrl as base64 string', () => {
+    const config = structuredClone(validConfig);
+    config.author.avatarUrl = 'data:image/jpeg;base64,/9j/4AAQSkZJRgAB';
     const result = TestimonialConfigSchema.safeParse(config);
     expect(result.success).toBe(true);
   });

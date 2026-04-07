@@ -1,6 +1,6 @@
 # config-driven-testimonials
 
-> **Work in progress** — currently at Iteration 2. See [roadmap](#roadmap) below.
+> **Work in progress** — Iteration 2 complete, Iteration 3 (Module Federation) next. See [roadmap](#roadmap) below.
 
 **[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)**
 
@@ -15,7 +15,7 @@ testimonials.config.ts   ← you fill this in (your data)
         ↓
 config-driven-testimonials   ← npm package (this repo)
         ↓
-Beautiful UI             ← Next.js demo app (coming in iteration 2)
+Beautiful UI             ← Next.js demo app (live on Vercel)
         ↓
 MF remote entry          ← consumable as a microfrontend (iteration 3)
 ```
@@ -34,18 +34,25 @@ const config: TestimonialConfig = {
   author: {
     name: 'Your Name',
     title: 'Senior Engineer',
+    avatarUrl: '/avatars/your-photo.jpeg',       // optional
     linkedinUrl: 'https://linkedin.com/in/yourprofile',
   },
   testimonials: [
     {
       id: '1',
-      author: { name: 'Jane Smith', title: 'Engineering Manager' },
+      author: {
+        name: 'Jane Smith',
+        title: 'Engineering Manager',
+        avatarUrl: '/avatars/jane-smith.jpeg',   // optional — initials fallback if omitted
+        linkedinUrl: 'https://linkedin.com/in/janesmith',
+      },
       text: 'An exceptional engineer and a great team player.',
       relationship: 'Managed at Acme Corp',
       date: '2024-01',
       source: { type: 'linkedin', url: 'https://linkedin.com/in/janesmith' },
+      recommendationUrl: 'https://linkedin.com/in/janesmith/details/recommendations/?detailScreenTabIndex=1', // optional
       associatedRole: { company: 'Acme Corp', period: '2022–2024' },
-      weight: { level: 'manager' },
+      weight: { level: 'manager', yearsExperience: 10 },
     },
   ],
 };
@@ -103,7 +110,7 @@ config-driven-testimonials/
 | Turborepo | Monorepo orchestration with smart caching |
 | pnpm | Fast, strict dependency resolution |
 | Vitest | Zero-config testing with native TypeScript support |
-| Next.js 14+ | Demo app with SSR *(iteration 2)* |
+| Next.js 16 | Demo app with SSR |
 | Webpack 5 MF | Module Federation remote entry *(iteration 3)* |
 | TailwindCSS + shadcn/ui | Utility-first styling, no runtime CSS-in-JS *(iteration 2)* |
 

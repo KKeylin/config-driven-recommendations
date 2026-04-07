@@ -27,13 +27,13 @@ export interface Testimonial {
   relationship: string;            // e.g. "Managed Kostya at RBC"
   date: string;
   source: TestimonialSource;
+  recommendationUrl?: string;      // direct link to given-recommendations on author's profile (if public)
   associatedRole: {                // which job this relates to
     company: string;
     period: string;
   };
   weight?: EndorsementWeight;      // seniority signal
 }
-
 export interface EndorsementWeight {
   level: 'report' | 'mentee' | 'peer' | 'lead' | 'manager' | 'director' | 'vp' | 'c-level';
   yearsExperience?: number;

@@ -45,12 +45,14 @@ testimonials-widget/
 - [x] Basic rendering: testimonial cards with person info, role, company, source label
 - [x] Unit tests (11 tests across both packages)
 
-### Iteration 2 — Next.js demo app (CURRENT)
-- [ ] `apps/demo` — Next.js 14+ app router
-- [ ] Populate with real testimonials data
-- [ ] Deploy to Vercel (live demo link in README)
-- [ ] Polish UI — animations, responsive layout
-- [ ] Tooltip on endorsement weight badge (level + yearsExperience of the author)
+### Iteration 2 — Next.js demo app ✓ DONE
+- [x] `apps/demo` — Next.js 16 app router
+- [x] Populate with real testimonials data
+- [x] Deploy to Vercel (live demo link in README)
+- [x] Polish UI — animations, responsive layout
+- [x] Tooltip on endorsement weight badge (level + yearsExperience of the author)
+- [x] Avatar support — rendered in card with deterministic-color initials fallback
+- [x] Author LinkedIn URLs — `recommendationUrl` (given-recommendations tab) with fallback to `author.linkedinUrl`
 
 ### Iteration 3 — Module Federation remote
 - [ ] `apps/mf-remote` — Webpack 5 MF remote entry
@@ -61,6 +63,18 @@ testimonials-widget/
 - [ ] Publish `@kKeylin/testimonials-widget` to npm
 - [ ] README with usage examples and config reference
 - [ ] GitHub Actions CI/CD
+
+### Iteration 5 — Visual config builder (admin UI)
+- [ ] `/admin` route in demo app — hidden from public, toggle via hotkey or URL
+- [ ] Form UI for adding/editing testimonials (no JSON editing)
+- [ ] Drag & drop reordering of cards
+- [ ] Export to `testimonials.config.ts` format
+- [ ] Demonstrates DX thinking — the tool eats its own dog food
+
+### Iteration 6 — Grouped / timeline view + avatar caching
+- [ ] `theme.variant: 'timeline'` — group testimonials by company with collapsible sections
+- [ ] Toggle between `cards` (flat list) and `timeline` (grouped by associatedRole.company + period)
+- [ ] Avatar caching via `next/image` — Next.js handles optimization and caching, no dependency on external URL availability
 
 ---
 

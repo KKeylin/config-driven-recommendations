@@ -3,8 +3,10 @@ import { z } from 'zod';
 export const PersonSchema = z.object({
   name: z.string(),
   title: z.string(),
+  summary: z.string().optional(),
   avatarUrl: z.string().optional(),
   linkedinUrl: z.string().url().optional(),
+  links: z.array(z.object({ label: z.string(), url: z.string().url() })).optional(),
   currentRole: z.object({
     title: z.string(),
     company: z.string(),
@@ -45,6 +47,7 @@ export const ThemeConfigSchema = z.object({
   variant: z.enum(['cards', 'timeline', 'masonry']),
   colorScheme: z.enum(['light', 'dark', 'auto']).optional(),
   accentColor: z.string().optional(),
+  showHeader: z.boolean().optional(),
   timeline: z.object({
     groupBy: z.enum(['type', 'company']).optional(),
     include: z.array(AssociatedRoleTypeSchema).optional(),

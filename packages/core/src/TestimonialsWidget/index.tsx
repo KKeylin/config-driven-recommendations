@@ -41,35 +41,37 @@ const initialsColors = [
 ];
 
 function getInitialsColor(name: string): string {
+  if (!name) return initialsColors[0] ?? '';
   const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return initialsColors[hash % initialsColors.length] ?? initialsColors[0] ?? '';
 }
 
 function Avatar({ name, avatarUrl, p }: { name: string; avatarUrl?: string; p: string }): React.ReactElement {
-  if (avatarUrl) {
-    return (
-      <img
-        src={avatarUrl}
-        alt={name}
-        className={`${p}-avatar tw-reserved-avatar h-22 w-22 object-cover ring-2 ring-zinc-100 dark:ring-zinc-800`}
-      />
-    );
-  }
-  const initials = name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
+  const initials = name ? name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() : '?';
   return (
-    <div className={`${p}-avatar tw-reserved-avatar flex h-22 w-22 items-center justify-center text-lg font-semibold ring-2 ring-zinc-100 dark:ring-zinc-800 ${getInitialsColor(name)}`}>
-      {initials}
+    <div className="tw-reserved-avatar-wrapper h-22 w-22 overflow-hidden ring-2 ring-zinc-100 dark:ring-zinc-800">
+      {avatarUrl ? (
+        <img
+          src={avatarUrl}
+          alt={name}
+          className={`${p}-avatar tw-reserved-avatar h-full w-full object-cover`}
+        />
+      ) : (
+        <div className={`${p}-avatar tw-reserved-avatar flex h-full w-full items-center justify-center text-lg font-semibold ${getInitialsColor(name)}`}>
+          {initials}
+        </div>
+      )}
     </div>
   );
 }
 
-function TestimonialCard({ testimonial, p }: { testimonial: Testimonial; p: string }): React.ReactElement {
+function TestimonialCard({ testimonial, p, active }: { testimonial: Testimonial; p: string; active?: boolean }): React.ReactElement {
   const sourceLabel = formatSourceLabel(testimonial.source);
   const sourceUrl = resolveSourceUrl(testimonial);
   const { author } = testimonial;
 
   return (
-    <div data-testid="testimonial-card" className={`${p}-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md [@media(hover:hover)]:bg-zinc-50 [@media(hover:hover)]:hover:bg-white dark:bg-zinc-900 dark:hover:shadow-zinc-900/50`}>
+    <div data-testid="testimonial-card" className={`${p}-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md [@media(hover:hover)]:bg-zinc-50 [@media(hover:hover)]:hover:bg-white dark:bg-zinc-900 dark:hover:shadow-zinc-900/50 ${active ? "!bg-white !shadow-md ring-2 ring-blue-200 dark:ring-blue-800" : ""}`}>
       <p className={`${p}-text text-base leading-7 text-zinc-600 [@media(hover:hover)]:group-hover:text-zinc-900 dark:text-zinc-300`}>
         &ldquo;{testimonial.text}&rdquo;
       </p>
@@ -143,38 +145,50 @@ function TestimonialCard({ testimonial, p }: { testimonial: Testimonial; p: stri
   );
 }
 
-export function TestimonialsWidget({ config, classPrefix = 't' }: TestimonialsWidgetProps): React.ReactElement {
+export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonialId }: TestimonialsWidgetProps): React.ReactElement {
   const p = classPrefix;
   return (
     <div data-testid="testimonials-widget" className={`${p}-widget mx-auto max-w-3xl`}>
-      <div className="mb-10 text-center">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100">
-          {config.author.name}
-        </h2>
-        <p className="mt-2 text-zinc-500 dark:text-zinc-400">
-          {config.author.title}
-        </p>
-        {config.author.linkedinUrl && (
-          <a
-            href={config.author.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-2 inline-block text-sm font-medium text-blue-600 dark:text-blue-400"
-          >
-            LinkedIn Profile ↗
-          </a>
-        )}
-      </div>
+      {config.theme?.showHeader !== false && (
+        <div className="mb-10 text-center">
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100">
+            {config.author.name}
+          </h2>
+          <p className="mt-2 text-zinc-500 dark:text-zinc-400">{config.author.title}</p>
+          {config.author.summary && (
+            <p className="mt-3 max-w-xl mx-auto text-sm text-zinc-500 dark:text-zinc-400">
+              {config.author.summary}
+            </p>
+          )}
+          {(config.author.linkedinUrl || config.author.links?.length) && (
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              {config.author.linkedinUrl && (
+                <a href={config.author.linkedinUrl} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                  LinkedIn ↗
+                </a>
+              )}
+              {config.author.links?.map((link) => (
+                <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                  {link.label} ↗
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
       <ul className="flex flex-col gap-4">
         {config.testimonials.map((testimonial, index) => (
           <li
             key={testimonial.id}
+            data-testimonial-id={testimonial.id}
             style={{
               animation: 'fadeInUp 0.4s ease-out both',
               animationDelay: `${index * 0.06}s`,
             }}
           >
-            <TestimonialCard testimonial={testimonial} p={p} />
+            <TestimonialCard testimonial={testimonial} p={p} active={testimonial.id === activeTestimonialId} />
           </li>
         ))}
       </ul>

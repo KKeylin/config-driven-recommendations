@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../../../packages/core/src/**/*.{ts,tsx}";
+@source "../../../packages/editor/src/**/*.{ts,tsx}";
 
 :root {
   --background: #ffffff;
@@ -51,13 +52,23 @@ body {
   max-height: 1.25rem;
 }
 
-.tw-reserved-avatar {
+.tw-reserved-avatar-wrapper {
+  overflow: hidden;
   border-radius: 50px;
   transition: border-radius 400ms ease-out;
 }
 
-[data-testid="testimonial-card"]:hover .tw-reserved-avatar {
+[data-testid="testimonial-card"]:hover .tw-reserved-avatar-wrapper {
   border-radius: 1rem;
+}
+
+.tw-reserved-avatar {
+  transform-origin: center top;
+  transition: transform 300ms ease-out;
+}
+
+[data-testid="testimonial-card"]:hover .tw-reserved-avatar {
+  transform: scale(1.1);
 }
 
 @keyframes fadeInUp {

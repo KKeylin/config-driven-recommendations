@@ -24,7 +24,7 @@ testimonials.config.ts   ← user fills this in (their data)
 testimonials-widget/
 ├── apps/
 │   ├── demo/              ← Next.js app (live demo + /editor route, Vercel deploy)
-│   └── mf-remote/         ← Module Federation remote entry (later iteration)
+│   └── mf-remote/         ← Module Federation remote entry (iteration 4)
 ├── packages/
 │   ├── core/              ← React component + TypeScript types (npm package)
 │   ├── config-schema/     ← Zod validation schema

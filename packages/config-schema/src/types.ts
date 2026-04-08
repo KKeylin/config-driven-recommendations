@@ -7,8 +7,10 @@ export interface TestimonialConfig {
 export interface Person {
   name: string;
   title: string;
+  summary?: string;
   avatarUrl?: string;
   linkedinUrl?: string;
+  links?: { label: string; url: string }[];
   currentRole?: {
     title: string;
     company: string;
@@ -47,6 +49,7 @@ export interface ThemeConfig {
   variant: 'cards' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
+  showHeader?: boolean;
   timeline?: {
     groupBy?: 'type' | 'company';
     include?: AssociatedRoleType[];

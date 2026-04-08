@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@config-driven-testimonials/editor": "workspace:*",
     "config-driven-testimonials": "workspace:*",
     "next": "16.2.2",
     "react": "19.2.4",

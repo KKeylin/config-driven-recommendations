@@ -1,10 +1,7 @@
 {
-  "name": "config-driven-testimonials",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/KKeylin/config-driven-recommendations"
-  },
-  "version": "0.0.5",
+  "name": "@config-driven-testimonials/editor",
+  "version": "0.0.1",
+  "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -28,10 +25,8 @@
     "react-dom": ">=18"
   },
   "devDependencies": {
-    "@testing-library/react": "^16.1.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "jsdom": "^29.0.1",
     "typescript": "^5.7.3",
     "vitest": "^2.1.8"
   }

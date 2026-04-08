@@ -23,11 +23,12 @@ testimonials.config.ts   ← user fills this in (their data)
 ```
 testimonials-widget/
 ├── apps/
-│   ├── demo/              ← Next.js app (live demo, Vercel deploy)
+│   ├── demo/              ← Next.js app (live demo + /editor route, Vercel deploy)
 │   └── mf-remote/         ← Module Federation remote entry (later iteration)
 ├── packages/
 │   ├── core/              ← React component + TypeScript types (npm package)
-│   └── config-schema/     ← Zod validation schema
+│   ├── config-schema/     ← Zod validation schema
+│   └── editor/            ← Visual config builder (npm package)
 ├── turbo.json
 ├── docs/
 │   └── ARCHITECTURE.md    ← this file
@@ -58,14 +59,22 @@ testimonials-widget/
 - [x] `classPrefix` prop — all elements get semantic CSS classes (`t-card`, `t-text`, etc.), prefix is configurable; `tw-reserved-*` classes are stable internal hooks immune to prefix changes
 - [x] `peer` renamed to `colleague` in endorsement weight levels
 
-### Iteration 3 — Config Editor
-- [ ] `packages/editor` — new package, exports `TestimonialsEditor` React component
-- [ ] Form UI for editing `author`, `testimonials[]`, and `theme`
-- [ ] Avatar upload: `<input type="file">` → resize to 128×128 via canvas → store as base64; no external dependencies
-- [ ] Import: load `.json` → Zod validation → populate form (with clear per-field error messages)
-- [ ] Export: form state → download `.json`
-- [ ] `apps/demo` — `/editor` route: split-screen layout (form left, live `TestimonialsWidget` preview right)
-- [ ] Drag & drop reordering via native HTML5 Drag and Drop API, no dependencies
+### Iteration 3 — Config Editor ✓ DONE
+- [x] `packages/editor` — new package, exports `TestimonialsEditor`, `Toolbar`, `ExportPanel`, `ImportPanel`, `ConfirmModal`
+- [x] Form UI for `author` (Header section with show/hide toggle), `testimonials[]`, `theme` (Settings)
+- [x] Avatar upload: `<input type="file">` → center-crop → resize to 128×128 via canvas → base64; no external dependencies
+- [x] Import: load `.json` → Zod validation → populate form (with per-field error messages); drag & drop file support
+- [x] Export: form state → download `.json`; validation with green/red highlighting per card
+- [x] `apps/demo` — `/editor` route: split-screen (editor left, live `TestimonialsWidget` preview right)
+- [x] Drag & drop reordering via native HTML5 Drag and Drop API, no dependencies
+- [x] Scroll-sync: opening a recommendation scrolls both panels; focusing author fields scrolls preview to top
+- [x] Active card highlight in preview while editing
+- [x] Add / delete recommendations; Clear all data with confirmation modal
+- [x] `showHeader` toggle — hides the widget header entirely; useful for embedding just the cards
+- [x] Custom links array (`Person.links`) — arbitrary label+url pairs replacing github/portfolio fields
+- [x] `Person.summary`, `Person.links` added to schema and rendered in widget
+- [x] Edit/Back navigation between demo and editor
+- [x] Info banner explaining editor purpose and workflow
 
 ### Iteration 4 — Module Federation remote
 - [ ] `apps/mf-remote` — Webpack 5 MF remote entry
@@ -73,7 +82,7 @@ testimonials-widget/
 - [ ] Document how to consume from a host app
 
 ### Iteration 5 — npm publish
-- [ ] Publish `@kKeylin/testimonials-widget` to npm
+- [ ] Publish `@kKeylin/testimonials-widget` and `@kKeylin/testimonials-editor` to npm
 - [ ] README with usage examples and config reference
 - [ ] GitHub Actions CI/CD
 
@@ -95,8 +104,10 @@ export interface TestimonialConfig {
 export interface Person {
   name: string;
   title: string;
-  avatarUrl?: string;        // URL or base64 (data:image/jpeg;base64,...)
+  summary?: string;             // short bio, rendered under title in widget header
+  avatarUrl?: string;           // URL or base64 (data:image/jpeg;base64,...)
   linkedinUrl?: string;
+  links?: { label: string; url: string }[];  // arbitrary links (GitHub, Medium, etc.)
   currentRole?: { title: string; company: string };
 }
 
@@ -133,11 +144,50 @@ export interface ThemeConfig {
   variant: 'cards' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
+  showHeader?: boolean;           // default true; set false to hide the header (embed cards only)
   timeline?: {
     groupBy?: 'type' | 'company';
     include?: AssociatedRoleType[];  // filter: show only these role types
   };
 }
+```
+
+---
+
+## packages/editor — public API
+
+```typescript
+// Main editor component
+<TestimonialsEditor
+  value={config}
+  onChange={setConfig}
+  showValidation={boolean}           // highlights cards green/red
+  onRecommendationOpen={(id) => {}}  // fired when a card is expanded
+  onAuthorFocus={() => {}}           // fired when any author field is focused
+/>
+
+// Fixed toolbar with Import/Export panels
+<Toolbar
+  activePanel={activePanel}
+  onPanelChange={setActivePanel}
+  exportPanel={<ExportPanel config={config} />}
+  importPanel={<ImportPanel onApply={handleImport} />}
+  onClearRequest={() => {}}
+  backHref="/"
+/>
+
+// Panel components (used as slots in Toolbar)
+<ExportPanel config={config} />
+<ImportPanel onApply={(config) => {}} />
+
+// Confirmation modal
+<ConfirmModal
+  title="..."
+  description="..."
+  confirmLabel="..."
+  onConfirm={() => {}}
+  onCancel={() => {}}
+/>
 ```
 
 ---
@@ -152,6 +202,9 @@ export interface ThemeConfig {
 | Styling | TailwindCSS + shadcn/ui | Modern, no runtime CSS-in-JS overhead |
 | Deploy | Vercel | Free tier, auto-deploy from GitHub |
 | MF bundler | Webpack 5 | Industry standard for Module Federation |
+| Avatar resize | Canvas API | No deps, runs in browser, center-crop to 128×128 JPEG |
+| DnD reorder | HTML5 native DnD | No deps, sufficient for list reordering |
+| Import validation | Zod `safeParse` | Structured error messages per field |
 
 ---
 
@@ -169,7 +222,7 @@ export interface ThemeConfig {
 
 ## What to avoid
 
-- Over-engineering iteration 1 — ship the core types and a working component first
+- Over-engineering — ship the current iteration scope first
 - Adding features not in the current iteration scope
 - Any `any` types
 - CSS-in-JS solutions (use Tailwind)

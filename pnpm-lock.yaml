@@ -14,6 +14,9 @@ importers:
 
   apps/demo:
     dependencies:
+      '@config-driven-testimonials/editor':
+        specifier: workspace:*
+        version: link:../../packages/editor
       config-driven-testimonials:
         specifier: workspace:*
         version: link:../../packages/core
@@ -89,6 +92,31 @@ importers:
       jsdom:
         specifier: ^29.0.1
         version: 29.0.1
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^2.1.8
+        version: 2.1.9(@types/node@20.19.39)(jsdom@29.0.1)(lightningcss@1.32.0)
+
+  packages/editor:
+    dependencies:
+      '@config-driven-testimonials/config-schema':
+        specifier: workspace:*
+        version: link:../config-schema
+      react:
+        specifier: '>=18'
+        version: 19.2.4
+      react-dom:
+        specifier: '>=18'
+        version: 19.2.4(react@19.2.4)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.18
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.3.5
+        version: 18.3.7(@types/react@18.3.28)
       typescript:
         specifier: ^5.7.3
         version: 5.9.3

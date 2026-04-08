@@ -1,10 +1,10 @@
 # config-driven-recommendations
 
-> **Work in progress** — Iteration 2 complete, Iteration 3 (Module Federation) next. See [roadmap](#roadmap) below.
+> **Work in progress** — Iteration 3 complete, Iteration 4 (Module Federation) next. See [roadmap](#roadmap) below.
 
-**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)**
+**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)** · **[Config Editor →](https://config-driven-testimonials-demo.vercel.app/editor)**
 
-A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.ts` — no code changes needed beyond the config.
+A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.ts` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
 
 ---
 
@@ -17,7 +17,7 @@ config-driven-testimonials   ← npm package (this repo)
         ↓
 Beautiful UI             ← Next.js demo app (live on Vercel)
         ↓
-MF remote entry          ← consumable as a microfrontend (iteration 3)
+MF remote entry          ← consumable as a microfrontend (iteration 4)
 ```
 
 The config is validated at runtime with Zod — wrong data structure gives you a clear error, not a silent crash.
@@ -34,8 +34,12 @@ const config: TestimonialConfig = {
   author: {
     name: 'Your Name',
     title: 'Senior Engineer',
-    avatarUrl: '/avatars/your-photo.jpeg',       // optional
+    summary: 'A short bio shown under your title.',  // optional
+    avatarUrl: '/avatars/your-photo.jpeg',            // optional; base64 also accepted
     linkedinUrl: 'https://linkedin.com/in/yourprofile',
+    links: [                                          // optional arbitrary links
+      { label: 'GitHub', url: 'https://github.com/yourhandle' },
+    ],
   },
   testimonials: [
     {
@@ -43,7 +47,7 @@ const config: TestimonialConfig = {
       author: {
         name: 'Jane Smith',
         title: 'Engineering Manager',
-        avatarUrl: '/avatars/jane-smith.jpeg',   // optional — initials fallback if omitted
+        avatarUrl: '/avatars/jane-smith.jpeg',  // optional — initials fallback if omitted
         linkedinUrl: 'https://linkedin.com/in/janesmith',
       },
       text: 'An exceptional engineer and a great team player.',
@@ -51,7 +55,11 @@ const config: TestimonialConfig = {
       date: '2024-01',
       source: { type: 'linkedin', url: 'https://linkedin.com/in/janesmith' },
       recommendationUrl: 'https://linkedin.com/in/janesmith/details/recommendations/?detailScreenTabIndex=1', // optional
-      associatedRole: { company: 'Acme Corp', period: '2022–2024' },
+      associatedRole: {
+        company: 'Acme Corp',
+        period: '2022–2024',
+        type: 'employment',  // 'employment' | 'contract' | 'education' | 'side-project'
+      },
       weight: { level: 'manager', yearsExperience: 10 },
     },
   ],
@@ -64,6 +72,17 @@ export default function App() {
   // → classes become: my-card, my-text, my-avatar, my-badge, etc.
 }
 ```
+
+---
+
+## Config editor
+
+The `/editor` route provides a visual split-screen builder: edit the config on the left, see the live widget preview on the right.
+
+- Add, reorder (drag & drop), and delete testimonials
+- Upload avatars — auto center-cropped and resized to 128×128
+- Import an existing `.json` config (with Zod validation and per-field errors)
+- Export the current config as `.json` ready for use
 
 ---
 
@@ -117,13 +136,14 @@ Every key element has a semantic CSS class for easy overrides. Default prefix is
 ## Monorepo structure
 
 ```
-config-driven-testimonials/
+config-driven-recommendations/
 ├── packages/
-│   ├── core/              ← React component (this is the npm package)
-│   └── config-schema/     ← Zod validation schema + TypeScript types
+│   ├── core/              ← React component (npm: config-driven-testimonials)
+│   ├── config-schema/     ← Zod validation schema + TypeScript types
+│   └── editor/            ← Visual config builder (npm: @config-driven-testimonials/editor)
 ├── apps/
-│   ├── demo/              ← Next.js demo app (iteration 2)
-│   └── mf-remote/         ← Module Federation remote entry (iteration 3)
+│   ├── demo/              ← Next.js demo app + /editor route (Vercel)
+│   └── mf-remote/         ← Module Federation remote entry (iteration 4)
 └── docs/
     └── ARCHITECTURE.md    ← full technical decisions
 ```
@@ -136,13 +156,15 @@ config-driven-testimonials/
 |---|---|
 | TypeScript (strict) | Type safety at every layer |
 | Zod | Runtime config validation — catches bad data before it reaches the UI |
-| React 18 | Component library |
+| React 19 | Component library |
 | Turborepo | Monorepo orchestration with smart caching |
 | pnpm | Fast, strict dependency resolution |
 | Vitest | Zero-config testing with native TypeScript support |
-| Next.js 16 | Demo app with SSR |
-| Webpack 5 MF | Module Federation remote entry *(iteration 3)* |
-| TailwindCSS + shadcn/ui | Utility-first styling, no runtime CSS-in-JS *(iteration 2)* |
+| Next.js 16 | Demo app with SSR and App Router |
+| TailwindCSS v4 + shadcn/ui | Utility-first styling, no runtime CSS-in-JS |
+| HTML5 Drag and Drop API | Dependency-free list reordering in the editor |
+| Canvas API | Avatar center-crop + resize to 128×128, no dependencies |
+| Webpack 5 MF | Module Federation remote entry *(iteration 4)* |
 
 ---
 
@@ -150,8 +172,9 @@ config-driven-testimonials/
 
 - [x] **Iteration 1** — Turborepo monorepo, TypeScript config schema, Zod validation, React component, unit tests
 - [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-testimonials-demo.vercel.app/)
-- [ ] **Iteration 3** — Webpack 5 Module Federation remote entry
-- [ ] **Iteration 4** — Publish to npm, GitHub Actions CI/CD
+- [x] **Iteration 3** — Visual config editor (`packages/editor`), split-screen `/editor` route, avatar upload, drag & drop reorder, import/export JSON
+- [ ] **Iteration 4** — Webpack 5 Module Federation remote entry
+- [ ] **Iteration 5** — Publish to npm, GitHub Actions CI/CD
 
 ---
 

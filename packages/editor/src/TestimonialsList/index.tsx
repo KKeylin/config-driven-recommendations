@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import type { Testimonial } from "@config-driven-testimonials/config-schema";
-import { TestimonialForm } from "../TestimonialForm/index.js";
+import { TestimonialForm } from "../TestimonialForm";
 import { validateTestimonial } from "../validate.js";
 import { smoothScrollToElement } from "../utils/smoothScroll.js";
 

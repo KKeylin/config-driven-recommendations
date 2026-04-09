@@ -28,6 +28,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <title>Kostiantyn Keilin — Recommendations</title>
         <script dangerouslySetInnerHTML={{ __html: `
           (function() {
             var mq = window.matchMedia('(prefers-color-scheme: dark)');

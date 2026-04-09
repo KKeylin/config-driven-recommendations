@@ -34,8 +34,14 @@ describe('TestimonialConfigSchema', () => {
     expect(result.success).toBe(true);
   });
 
-  it('rejects missing required author field', () => {
-    const invalid = { ...validConfig, author: { title: 'Engineer' } };
+  it('accepts author with no name or title (both optional)', () => {
+    const valid = { ...validConfig, author: {} };
+    const result = TestimonialConfigSchema.safeParse(valid);
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects author with invalid linkedinUrl', () => {
+    const invalid = { ...validConfig, author: { name: 'Alice', linkedinUrl: 'not-a-url' } };
     const result = TestimonialConfigSchema.safeParse(invalid);
     expect(result.success).toBe(false);
   });

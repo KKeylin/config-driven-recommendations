@@ -20,14 +20,14 @@ function formatSourceLabel(source: TestimonialSource): string {
 }
 
 const levelColors: Record<EndorsementWeight['level'], string> = {
-  'report':    'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
-  'mentee':    'bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400',
-  'colleague': 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400',
-  'lead':      'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-  'manager':   'bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400',
-  'director':  'bg-orange-50 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
-  'vp':        'bg-red-50 text-red-700 dark:bg-red-900/30 dark:text-red-400',
-  'c-level':   'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+  'report':    'bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300',
+  'mentee':    'bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300',
+  'colleague': 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300',
+  'lead':      'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+  'manager':   'bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+  'director':  'bg-orange-50 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
+  'vp':        'bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300',
+  'c-level':   'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300',
 };
 
 const initialsColors = [
@@ -71,8 +71,8 @@ function TestimonialCard({ testimonial, p, active }: { testimonial: Testimonial;
   const { author } = testimonial;
 
   return (
-    <div data-testid="testimonial-card" className={`${p}-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md [@media(hover:hover)]:bg-zinc-50 [@media(hover:hover)]:hover:bg-white dark:bg-zinc-900 dark:hover:shadow-zinc-900/50 ${active ? "!bg-white !shadow-md ring-2 ring-blue-200 dark:ring-blue-800" : ""}`}>
-      <p className={`${p}-text text-base leading-7 text-zinc-600 [@media(hover:hover)]:group-hover:text-zinc-900 dark:text-zinc-300`}>
+    <div data-testid="testimonial-card" className={`${p}-card group flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-sm transition-all duration-200 hover:shadow-md [@media(hover:hover)]:bg-zinc-50 [@media(hover:hover)]:hover:bg-white dark:bg-zinc-900 dark:[@media(hover:hover)]:bg-zinc-900 dark:[@media(hover:hover)]:hover:bg-zinc-800 dark:hover:shadow-zinc-950/50 ${active ? "!bg-white !shadow-md ring-2 ring-blue-200 dark:!bg-zinc-800 dark:ring-blue-800" : ""}`}>
+      <p className={`${p}-text text-base leading-7 text-zinc-600 [@media(hover:hover)]:group-hover:text-zinc-900 dark:text-zinc-300 dark:[@media(hover:hover)]:group-hover:text-zinc-100`}>
         &ldquo;{testimonial.text}&rdquo;
       </p>
       <div className={`${p}-signature flex items-center justify-between`}>
@@ -147,16 +147,30 @@ function TestimonialCard({ testimonial, p, active }: { testimonial: Testimonial;
 
 export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonialId }: TestimonialsWidgetProps): React.ReactElement {
   const p = classPrefix;
+  const colorScheme = config.theme?.colorScheme;
+  const accentColor = config.theme?.accentColor;
+  const backgroundColor = config.theme?.backgroundColor;
+  const rootStyle: React.CSSProperties = {
+    ...(accentColor ? { '--accent': accentColor } as React.CSSProperties : {}),
+    ...(backgroundColor ? { backgroundColor } : {}),
+  };
   return (
-    <div data-testid="testimonials-widget" className={`${p}-widget mx-auto max-w-3xl`}>
+    <div
+      data-testid="testimonials-widget"
+      className={`${p}-widget mx-auto max-w-3xl${colorScheme === 'dark' ? ' dark' : colorScheme === 'light' ? ' light' : ''}`}
+      {...(Object.keys(rootStyle).length ? { style: rootStyle } : {})}
+    >
       {config.theme?.showHeader !== false && (
         <div className="mb-10 text-center">
-          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100">
+          <h2
+            className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl dark:text-zinc-100"
+            {...(accentColor ? { style: { color: 'var(--accent)' } } : {})}
+          >
             {config.author.name}
           </h2>
           <p className="mt-2 text-zinc-500 dark:text-zinc-400">{config.author.title}</p>
           {config.author.summary && (
-            <p className="mt-3 max-w-xl mx-auto text-sm text-zinc-500 dark:text-zinc-400">
+            <p className="mt-3 max-w-xl mx-auto text-sm text-zinc-500 dark:text-zinc-400 whitespace-pre-wrap bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm rounded-xl px-4 py-3">
               {config.author.summary}
             </p>
           )}
@@ -164,13 +178,15 @@ export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonia
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
               {config.author.linkedinUrl && (
                 <a href={config.author.linkedinUrl} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                  className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                  {...(accentColor ? { style: { borderColor: 'var(--accent)', color: 'var(--accent)' } } : {})}>
                   LinkedIn ↗
                 </a>
               )}
               {config.author.links?.map((link) => (
                 <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 transition-colors dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                  className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium transition-colors cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                  {...(accentColor ? { style: { borderColor: 'var(--accent)', color: 'var(--accent)' } } : {})}>
                   {link.label} ↗
                 </a>
               ))}

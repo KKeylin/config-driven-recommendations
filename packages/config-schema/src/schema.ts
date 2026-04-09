@@ -47,6 +47,7 @@ export const ThemeConfigSchema = z.object({
   variant: z.enum(['cards', 'timeline', 'masonry']),
   colorScheme: z.enum(['light', 'dark', 'auto']).optional(),
   accentColor: z.string().optional(),
+  backgroundColor: z.string().optional(),
   showHeader: z.boolean().optional(),
   timeline: z.object({
     groupBy: z.enum(['type', 'company']).optional(),

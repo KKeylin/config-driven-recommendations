@@ -7,7 +7,7 @@
 ### Core concept
 
 ```
-testimonials.config.ts   ← user fills this in (their data)
+testimonials.config.json ← user fills this in (their data); validated via parseConfig()
         ↓
   @testimonials/core     ← npm package (our code)
         ↓
@@ -75,6 +75,13 @@ testimonials-widget/
 - [x] `Person.summary`, `Person.links` added to schema and rendered in widget
 - [x] Edit/Back navigation between demo and editor
 - [x] Info banner explaining editor purpose and workflow
+- [x] `ThemeForm` — Settings block in editor: `colorScheme` (auto/light/dark), `accentColor`, `backgroundColor` with color pickers
+- [x] `Person.name` and `Person.title` made optional — header works without them
+- [x] `parseConfig(raw)` helper in core — validates unknown JSON against Zod schema, throws descriptive errors; solves TypeScript string literal widening for JSON imports
+- [x] Class-based dark mode via Tailwind v4 `@custom-variant dark` — supports both system preference and per-widget override (`dark`/`light` class on widget root)
+- [x] Editor panel uses inverse theme vs. preview panel (MutationObserver on `html.dark`)
+- [x] Accent color applied to author name and profile links via `--accent` CSS custom property
+- [x] `backgroundColor` applied via inline style on widget root; disabled in editor when `colorScheme: auto`
 
 ### Iteration 4 — Module Federation remote ✓ DONE
 - [x] `apps/mf-remote` — Webpack 5 MF remote entry (port 3001 in dev)

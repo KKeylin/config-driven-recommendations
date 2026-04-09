@@ -1,8 +1,8 @@
 import React from "react";
 import type { TestimonialConfig } from "@config-driven-testimonials/config-schema";
-import { HeaderForm } from "../HeaderForm/index.js";
-import { TestimonialsList } from "../TestimonialsList/index.js";
-import { ThemeForm } from "../ThemeForm/index.js";
+import { HeaderForm } from "../HeaderForm/";
+import { TestimonialsList } from "../TestimonialsList";
+import { ThemeForm } from "../ThemeForm";
 
 export interface TestimonialsEditorProps {
   value: TestimonialConfig;

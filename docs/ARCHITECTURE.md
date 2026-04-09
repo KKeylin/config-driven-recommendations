@@ -102,8 +102,8 @@ export interface TestimonialConfig {
 }
 
 export interface Person {
-  name: string;
-  title: string;
+  name?: string;                // optional — header can be used without displaying a name
+  title?: string;               // optional — header can be used without displaying a title
   summary?: string;             // short bio, rendered under title in widget header
   avatarUrl?: string;           // URL or base64 (data:image/jpeg;base64,...)
   linkedinUrl?: string;

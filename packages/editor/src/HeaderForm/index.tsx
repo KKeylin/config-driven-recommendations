@@ -56,8 +56,8 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
 
       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showHeader ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="flex flex-col gap-3">
-          <Field label="Name" value={author.name} onChange={(v) => set("name", v)} required />
-          <Field label="Title" value={author.title} onChange={(v) => set("title", v)} required />
+          <Field label="Name" value={author.name ?? ""} onChange={(v) => set("name", v || undefined)} />
+          <Field label="Title" value={author.title ?? ""} onChange={(v) => set("title", v || undefined)} />
           <Textarea
             label="Summary"
             value={author.summary ?? ""}

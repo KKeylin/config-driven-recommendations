@@ -16,8 +16,6 @@ function isValidUrl(s: string): boolean {
 
 export function validateAuthor(author: Person): ValidationResult {
   const errors: string[] = [];
-  if (!author?.name?.trim()) errors.push("Name is empty");
-  if (!author?.title?.trim()) errors.push("Title is empty");
   if (author?.linkedinUrl && !isValidUrl(author.linkedinUrl)) errors.push("LinkedIn URL is not a valid URL");
   author?.links?.forEach((link, i) => {
     if (!link.label.trim()) errors.push(`Link ${i + 1}: label is empty`);

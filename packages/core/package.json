@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/KKeylin/config-driven-recommendations"
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

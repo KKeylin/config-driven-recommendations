@@ -82,8 +82,8 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
       <div>
         <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Recommender</p>
         <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100">
-          <Field label="Name" value={value.author.name} onChange={(v) => setAuthor("name", v)} required />
-          <Field label="Title" value={value.author.title} onChange={(v) => setAuthor("title", v)} required />
+          <Field label="Name" value={value.author.name ?? ""} onChange={(v) => setAuthor("name", v)} required />
+          <Field label="Title" value={value.author.title ?? ""} onChange={(v) => setAuthor("title", v)} required />
           <Field
             label="LinkedIn URL"
             value={value.author.linkedinUrl ?? ""}
@@ -91,7 +91,7 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
           />
           <AvatarUpload
             value={value.author.avatarUrl}
-            name={value.author.name}
+            {...(value.author.name ? { name: value.author.name } : {})}
             onChange={(v) => {
               const author = { ...value.author };
               if (v !== undefined) author.avatarUrl = v;

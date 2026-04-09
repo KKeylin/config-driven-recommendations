@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd ../.. && pnpm --filter mf-remote build",
+  "outputDirectory": "dist",
+  "installCommand": "cd ../.. && pnpm install"
+}

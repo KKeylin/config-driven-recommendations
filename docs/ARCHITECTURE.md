@@ -76,10 +76,10 @@ testimonials-widget/
 - [x] Edit/Back navigation between demo and editor
 - [x] Info banner explaining editor purpose and workflow
 
-### Iteration 4 — Module Federation remote
-- [ ] `apps/mf-remote` — Webpack 5 MF remote entry
-- [ ] Expose `TestimonialsWidget` as MF remote
-- [ ] Document how to consume from a host app
+### Iteration 4 — Module Federation remote ✓ DONE
+- [x] `apps/mf-remote` — Webpack 5 MF remote entry (port 3001 in dev)
+- [x] Expose `TestimonialsWidget` as MF remote (`testimonialsRemote/TestimonialsWidget`)
+- [x] Document how to consume from a host app (see below)
 
 ### Iteration 5 — npm publish
 - [ ] Publish `@kKeylin/testimonials-widget` and `@kKeylin/testimonials-editor` to npm
@@ -189,6 +189,66 @@ export interface ThemeConfig {
   onCancel={() => {}}
 />
 ```
+
+---
+
+## apps/mf-remote — Module Federation remote
+
+The remote exposes `TestimonialsWidget` under the name `testimonialsRemote`.
+
+### Dev
+```bash
+pnpm --filter mf-remote dev   # serves remoteEntry.js at http://localhost:3001/remoteEntry.js
+```
+
+### Build
+```bash
+pnpm --filter mf-remote build  # outputs dist/remoteEntry.js
+```
+
+### Consuming from a host app (Webpack 5)
+
+**`webpack.config.js` (host):**
+```js
+const { ModuleFederationPlugin } = require('webpack').container;
+
+new ModuleFederationPlugin({
+  remotes: {
+    testimonialsRemote: 'testimonialsRemote@http://localhost:3001/remoteEntry.js',
+  },
+  shared: {
+    react: { singleton: true },
+    'react-dom': { singleton: true },
+  },
+});
+```
+
+**Usage in host component:**
+```tsx
+import React, { Suspense, lazy } from 'react';
+import type { TestimonialConfig } from 'testimonialsRemote/TestimonialsWidget';
+
+const TestimonialsWidget = lazy(() =>
+  import('testimonialsRemote/TestimonialsWidget').then((m) => ({ default: m.TestimonialsWidget }))
+);
+
+const config: TestimonialConfig = { /* ... */ };
+
+export function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TestimonialsWidget config={config} />
+    </Suspense>
+  );
+}
+```
+
+### What is shared
+| Module | Strategy | Reason |
+|---|---|---|
+| `react` | singleton | Only one React instance allowed per page |
+| `react-dom` | singleton | Tied to the React singleton |
+| `config-driven-testimonials` | bundled into remote | Not shared — host may not have it |
 
 ---
 

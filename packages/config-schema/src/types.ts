@@ -49,6 +49,7 @@ export interface ThemeConfig {
   variant: 'cards' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
+  backgroundColor?: string;
   showHeader?: boolean;
   timeline?: {
     groupBy?: 'type' | 'company';

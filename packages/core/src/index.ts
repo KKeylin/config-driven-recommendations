@@ -1,4 +1,5 @@
 export { TestimonialsWidget } from './TestimonialsWidget';
+export { parseConfig } from './parseConfig';
 export type { TestimonialsWidgetProps } from './TestimonialsWidget/TestimonialsWidget.types';
 
 // Re-export types from config-schema for consumer convenience

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const PersonSchema = z.object({
-  name: z.string(),
-  title: z.string(),
+  name: z.string().optional(),
+  title: z.string().optional(),
   summary: z.string().optional(),
   avatarUrl: z.string().optional(),
   linkedinUrl: z.string().url().optional(),

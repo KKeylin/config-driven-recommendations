@@ -5,8 +5,8 @@ export interface TestimonialConfig {
 }
 
 export interface Person {
-  name: string;
-  title: string;
+  name?: string;
+  title?: string;
   summary?: string;
   avatarUrl?: string;
   linkedinUrl?: string;

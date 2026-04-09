@@ -46,18 +46,18 @@ function getInitialsColor(name: string): string {
   return initialsColors[hash % initialsColors.length] ?? initialsColors[0] ?? '';
 }
 
-function Avatar({ name, avatarUrl, p }: { name: string; avatarUrl?: string; p: string }): React.ReactElement {
+function Avatar({ name, avatarUrl, p }: { name?: string; avatarUrl?: string; p: string }): React.ReactElement {
   const initials = name ? name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase() : '?';
   return (
     <div className="tw-reserved-avatar-wrapper h-22 w-22 overflow-hidden ring-2 ring-zinc-100 dark:ring-zinc-800">
       {avatarUrl ? (
         <img
           src={avatarUrl}
-          alt={name}
+          alt={name ?? ''}
           className={`${p}-avatar tw-reserved-avatar h-full w-full object-cover`}
         />
       ) : (
-        <div className={`${p}-avatar tw-reserved-avatar flex h-full w-full items-center justify-center text-lg font-semibold ${getInitialsColor(name)}`}>
+        <div className={`${p}-avatar tw-reserved-avatar flex h-full w-full items-center justify-center text-lg font-semibold ${getInitialsColor(name ?? '')}`}>
           {initials}
         </div>
       )}
@@ -83,10 +83,10 @@ function TestimonialCard({ testimonial, p, active }: { testimonial: Testimonial;
         <div className="relative shrink-0">
           {author.linkedinUrl ? (
             <a href={author.linkedinUrl} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
-              <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
+              <Avatar {...(author.name ? { name: author.name } : {})} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
             </a>
           ) : (
-            <Avatar name={author.name} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
+            <Avatar {...(author.name ? { name: author.name } : {})} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
           )}
           {testimonial.weight && (
             <div className={`${p}-badge tw-reserved-badge inline-flex flex-col items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${levelColors[testimonial.weight.level]}`}>

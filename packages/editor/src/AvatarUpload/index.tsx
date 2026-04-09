@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 
 export interface AvatarUploadProps {
   value: string | undefined;
-  name: string;
+  name?: string;
   onChange: (value: string | undefined) => void;
 }
 
@@ -88,7 +88,7 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
             <img src={value} alt={name} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-lg font-semibold">
-              {getInitials(name)}
+              {getInitials(name ?? "")}
             </div>
           )}
         </div>

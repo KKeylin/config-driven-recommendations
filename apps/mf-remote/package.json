@@ -1,0 +1,23 @@
+{
+  "name": "mf-remote",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "config-driven-testimonials": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.3",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.2"
+  }
+}

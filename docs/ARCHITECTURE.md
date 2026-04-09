@@ -144,6 +144,7 @@ export interface ThemeConfig {
   variant: 'cards' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
+  backgroundColor?: string;         // overrides page background behind the widget
   showHeader?: boolean;           // default true; set false to hide the header (embed cards only)
   timeline?: {
     groupBy?: 'type' | 'company';

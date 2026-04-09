@@ -15,7 +15,7 @@ export function AuthorForm({ value, onChange, onFocus }: AuthorFormProps): React
 
   return (
     <section onFocus={onFocus}>
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">Author</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400 mb-4">Author</h2>
       <div className="flex flex-col gap-3">
         <Field label="Name" value={value.name ?? ""} onChange={(v) => set("name", v || undefined)} />
         <Field label="Title" value={value.title ?? ""} onChange={(v) => set("title", v || undefined)} />

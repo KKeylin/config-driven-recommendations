@@ -3,7 +3,7 @@
     "name": "Kostiantyn Keilin",
     "title": "Senior Software Engineer",
     "linkedinUrl": "https://www.linkedin.com/in/konstantin-keylin/",
-    "summary": "Senior Software Engineer with 15+ years delivering scalable, performance-driven applications across fintech and enterprise, with deep\nfront-end expertise and working knowledge of cloud infrastructure and full-stack contexts. Specialized in microfrontend architecture\n(Module Federation), config-driven feature management, and reusable component systems that scale across large teams.",
+    "summary": "Senior Software Engineer with 15+ years delivering scalable, performance-driven applications across fintech and enterprise, with deep front-end expertise and working knowledge of cloud infrastructure and full-stack contexts. Specialized in microfrontend architecture (Module Federation), config-driven feature management, and reusable component systems that scale across large teams.",
     "links": [
       {
         "label": "GitHub",
@@ -14,6 +14,10 @@
         "url": "https://medium.com/@konstantinkeylin"
       }
     ]
+  },
+  "theme": {
+    "variant": "cards",
+    "colorScheme": "auto"
   },
   "testimonials": [
     {

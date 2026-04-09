@@ -106,9 +106,9 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
 
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400 mb-4">
         Recommendations{" "}
-        <span className="ml-1 text-gray-400 font-normal normal-case tracking-normal">({value.length})</span>
+        <span className="ml-1 text-gray-400 dark:text-zinc-500 font-normal normal-case tracking-normal">({value.length})</span>
       </h2>
       <div className="flex flex-col gap-2">
         {value.map((testimonial, index) => {
@@ -118,7 +118,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
 
           const borderClass = validation
             ? validation.valid ? "border-green-300 bg-green-50" : "border-red-300 bg-red-50"
-            : "border-gray-200";
+            : "border-gray-200 dark:border-zinc-700";
 
           const showLineAbove = dropPosition?.index === index && dropPosition.side === "above";
           const showLineBelow = dropPosition?.index === index && dropPosition.side === "below";
@@ -159,14 +159,14 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
                     onClick={() => toggle(testimonial.id)}
                     className="flex-1 flex items-center text-left hover:brightness-95 transition-all px-3 py-3 min-w-0"
                   >
-                    <span className="text-3xl font-bold text-gray-200 w-10 shrink-0 leading-none select-none">
+                    <span className="text-3xl font-bold text-gray-200 dark:text-zinc-700 w-10 shrink-0 leading-none select-none">
                       {index + 1}
                     </span>
                     <div className="flex flex-col gap-0.5 min-w-0 flex-1 ml-3">
-                      <span className="text-sm font-medium text-gray-800 truncate">
-                        {testimonial.author.name || <span className="text-gray-400 italic">Unnamed</span>}
+                      <span className="text-sm font-medium text-gray-800 dark:text-zinc-200 truncate">
+                        {testimonial.author.name || <span className="text-gray-400 dark:text-zinc-500 italic">Unnamed</span>}
                       </span>
-                      <span className="text-xs text-gray-500 truncate">
+                      <span className="text-xs text-gray-500 dark:text-zinc-400 truncate">
                         {testimonial.associatedRole.company || "—"} · {testimonial.date || "—"}
                       </span>
                     </div>
@@ -196,7 +196,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
                 </div>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 pt-2 border-t border-gray-100 bg-white">
+                  <div className="px-4 pb-4 pt-2 border-t border-gray-100 dark:border-zinc-700 bg-white dark:bg-zinc-900">
                     <TestimonialForm
                       value={testimonial}
                       onChange={(updated) => update(index, updated)}
@@ -213,7 +213,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
         <button
           type="button"
           onClick={add}
-          className="mt-1 flex items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-3 text-sm text-gray-500 hover:border-blue-400 hover:text-blue-500 transition-colors"
+          className="mt-1 flex items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 dark:border-zinc-600 px-4 py-3 text-sm text-gray-500 dark:text-zinc-400 hover:border-blue-400 hover:text-blue-500 transition-colors"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />

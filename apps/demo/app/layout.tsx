@@ -27,6 +27,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            var mq = window.matchMedia('(prefers-color-scheme: dark)');
+            function sync(e) { document.documentElement.classList.toggle('dark', e.matches); }
+            sync(mq);
+            mq.addEventListener('change', sync);
+          })();
+        ` }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

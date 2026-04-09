@@ -24,12 +24,12 @@ export function TestimonialsEditor({ value, onChange, showValidation = false, on
         onShowHeaderChange={(show) => onChange({ ...value, theme: { variant: "cards", ...value.theme, showHeader: show } })}
         {...(onAuthorFocus !== undefined ? { onFocus: onAuthorFocus } : {})}
       />
-      <hr className="border-gray-200" />
+      <hr className="border-gray-200 dark:border-zinc-700" />
       <ThemeForm
         value={value.theme}
         onChange={(theme) => onChange({ ...value, theme })}
       />
-      <hr className="border-gray-200" />
+      <hr className="border-gray-200 dark:border-zinc-700" />
       <TestimonialsList
         value={value.testimonials}
         onChange={(testimonials) => onChange({ ...value, testimonials })}

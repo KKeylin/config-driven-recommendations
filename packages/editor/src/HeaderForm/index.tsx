@@ -36,7 +36,7 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
   return (
     <section onFocus={onFocus}>
       <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Header</h2>
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400">Header</h2>
         <button
           type="button"
           role="switch"
@@ -72,7 +72,7 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
 
           {/* Custom links */}
           <div className="flex flex-col gap-2">
-            <span className="text-xs font-medium text-gray-600">Links</span>
+            <span className="text-xs font-medium text-gray-600 dark:text-zinc-400">Links</span>
             {links.map((link, index) => (
               <div key={index} className="flex items-center gap-2">
                 <input
@@ -80,14 +80,14 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
                   placeholder="Label"
                   value={link.label}
                   onChange={(e) => setLink(index, "label", e.target.value)}
-                  className="w-28 shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="w-28 shrink-0 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
                 />
                 <input
                   type="text"
                   placeholder="URL"
                   value={link.url}
                   onChange={(e) => setLink(index, "url", e.target.value)}
-                  className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                  className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100"
                 />
                 <button
                   type="button"

@@ -3,7 +3,25 @@
     "name": "config-driven-testimonials demo",
     "title": "by Kostiantyn Keilin, Senior Software Engineer",
     "linkedinUrl": "https://www.linkedin.com/in/konstantin-keylin/",
-    "summary": "This is a demo of my pet project: a fully configurable testimonials widget. Every field you see — layout, colors, content, animation — is driven by a config. Use the panel on the left to generate your own configuration and see changes in real time.\n\n💬 The testimonials shown are real reviews from real people I've worked with. If you'd like to collaborate — feel free to connect."
+    "summary": "This is a demo of my pet project: a fully configurable testimonials widget. Every field you see — layout, colors, content, animation — is driven by a config. Use the panel on the left to generate your own configuration and see changes in real time.\n\n💬 The testimonials shown are real reviews from real people I've worked with. \nIf you'd like to collaborate — feel free to connect.",
+    "links": [
+      {
+        "label": "npm",
+        "url": "https://www.npmjs.com/package/config-driven-testimonials"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/KKeylin"
+      },
+      {
+        "label": "Medium",
+        "url": "https://medium.com/@konstantinkeylin"
+      }
+    ]
+  },
+  "theme": {
+    "variant": "cards",
+    "colorScheme": "auto"
   },
   "testimonials": [
     {

@@ -80,8 +80,8 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
 
       {/* Author */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Recommender</p>
-        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">Recommender</p>
+        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100 dark:border-zinc-700">
           <Field label="Name" value={value.author.name ?? ""} onChange={(v) => setAuthor("name", v)} required />
           <Field label="Title" value={value.author.title ?? ""} onChange={(v) => setAuthor("title", v)} required />
           <Field
@@ -104,8 +104,8 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
 
       {/* Associated role */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Associated Role</p>
-        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">Associated Role</p>
+        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100 dark:border-zinc-700">
           <div className="grid grid-cols-2 gap-3">
             <Field
               label="Company"
@@ -138,8 +138,8 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
 
       {/* Source */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Source</p>
-        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">Source</p>
+        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100 dark:border-zinc-700">
           <Select
             label="Type"
             value={value.source.type}
@@ -159,8 +159,8 @@ export function TestimonialForm({ value, onChange }: TestimonialFormProps): Reac
 
       {/* Weight */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Endorsement Weight</p>
-        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-3">Endorsement Weight</p>
+        <div className="flex flex-col gap-3 pl-3 border-l-2 border-gray-100 dark:border-zinc-700">
           <Select
             label="Level"
             value={value.weight?.level ?? "colleague"}

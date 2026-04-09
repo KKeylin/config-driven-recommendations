@@ -196,6 +196,11 @@ export interface ThemeConfig {
 
 The remote exposes `TestimonialsWidget` under the name `testimonialsRemote`.
 
+### Live remote entry
+```
+https://config-driven-recommendations-demo.vercel.app/remoteEntry.js
+```
+
 ### Dev
 ```bash
 pnpm --filter mf-remote dev   # serves remoteEntry.js at http://localhost:3001/remoteEntry.js
@@ -214,7 +219,7 @@ const { ModuleFederationPlugin } = require('webpack').container;
 
 new ModuleFederationPlugin({
   remotes: {
-    testimonialsRemote: 'testimonialsRemote@http://localhost:3001/remoteEntry.js',
+    testimonialsRemote: 'testimonialsRemote@https://config-driven-recommendations-demo.vercel.app/remoteEntry.js',
   },
   shared: {
     react: { singleton: true },

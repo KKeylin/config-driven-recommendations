@@ -88,10 +88,10 @@ testimonials-widget/
 - [x] Expose `TestimonialsWidget` as MF remote (`testimonialsRemote/TestimonialsWidget`)
 - [x] Document how to consume from a host app (see below)
 
-### Iteration 5 — npm publish
-- [ ] Publish `@kKeylin/testimonials-widget` and `@kKeylin/testimonials-editor` to npm
-- [ ] README with usage examples and config reference
-- [ ] GitHub Actions CI/CD
+### Iteration 5 — npm publish ✓ DONE
+- [x] Publish `config-driven-testimonials` and `@config-driven-testimonials/editor` to npm (`v1.0.0`)
+- [x] README with usage examples and config reference
+- [x] GitHub Actions CI/CD (ci.yml + publish.yml)
 
 ### Iteration 6 — Grouped / timeline view
 - [ ] `theme.variant: 'timeline'` — group testimonials by company with collapsible sections

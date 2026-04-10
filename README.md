@@ -1,10 +1,15 @@
-# config-driven-recommendations
+# config-driven-testimonials
 
-> **Work in progress** — Iteration 3 complete, Iteration 4 (Module Federation) next. See [roadmap](#roadmap) below.
+**A polished React testimonials widget powered entirely by a single JSON config.**
+No database. No API. No CMS. Configure once — deploy anywhere.
 
-**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)** · **[Config Editor →](https://config-driven-testimonials-demo.vercel.app/editor)**
+**[Live Demo →](https://config-driven-recommendations-demo.vercel.app/)** · **[Config Editor →](https://config-driven-recommendations-demo.vercel.app/editor)**
 
-A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.ts` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
+[![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
+[![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
+[![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
+
+A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.json` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
 
 ---
 
@@ -27,10 +32,13 @@ The config is validated at runtime with Zod — wrong data structure gives you a
 ## Quick start
 
 ```ts
-import { TestimonialsWidget } from 'config-driven-testimonials';
-import type { TestimonialConfig } from 'config-driven-testimonials';
+import { TestimonialsWidget, parseConfig } from 'config-driven-testimonials';
+import configJson from './testimonials.config.json';
 
-const config: TestimonialConfig = {
+const config = parseConfig(configJson);
+
+// or write the config inline:
+const config = {
   author: {
     name: 'Your Name',
     title: 'Senior Engineer',
@@ -171,10 +179,11 @@ config-driven-recommendations/
 ## Roadmap
 
 - [x] **Iteration 1** — Turborepo monorepo, TypeScript config schema, Zod validation, React component, unit tests
-- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-testimonials-demo.vercel.app/)
+- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-recommendations-demo.vercel.app/)
 - [x] **Iteration 3** — Visual config editor (`packages/editor`), split-screen `/editor` route, avatar upload, drag & drop reorder, import/export JSON
-- [ ] **Iteration 4** — Webpack 5 Module Federation remote entry
-- [ ] **Iteration 5** — Publish to npm, GitHub Actions CI/CD
+- [x] **Iteration 4** — Webpack 5 Module Federation remote entry
+- [x] **Iteration 5** — Published to npm (`v1.0.0`), README, GitHub Actions CI/CD
+- [ ] **Iteration 6** — Timeline view: group testimonials by company with collapsible sections
 
 ---
 

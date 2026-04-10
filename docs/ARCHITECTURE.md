@@ -206,7 +206,7 @@ The remote exposes `TestimonialsWidget` under the name `testimonialsRemote`.
 
 ### Live remote entry
 ```
-https://config-driven-recommendations-demo.vercel.app/remoteEntry.js
+https://config-driven-testimonials-demo.vercel.app/remoteEntry.js
 ```
 
 ### Dev
@@ -227,7 +227,7 @@ const { ModuleFederationPlugin } = require('webpack').container;
 
 new ModuleFederationPlugin({
   remotes: {
-    testimonialsRemote: 'testimonialsRemote@https://config-driven-recommendations-demo.vercel.app/remoteEntry.js',
+    testimonialsRemote: 'testimonialsRemote@https://config-driven-testimonials-demo.vercel.app/remoteEntry.js',
   },
   shared: {
     react: { singleton: true },

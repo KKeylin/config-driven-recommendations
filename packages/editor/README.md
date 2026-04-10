@@ -17,7 +17,7 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 
 ### Try it without installing
 
-> **[✏ Open the hosted editor](https://config-driven-recommendations-demo.vercel.app/editor)**
+> **[✏ Open the hosted editor](https://config-driven-testimonials-demo.vercel.app/editor)**
 
 ---
 

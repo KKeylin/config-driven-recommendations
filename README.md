@@ -3,7 +3,7 @@
 **A polished React testimonials widget powered entirely by a single JSON config.**
 No database. No API. No CMS. Configure once — deploy anywhere.
 
-**[Live Demo →](https://config-driven-recommendations-demo.vercel.app/)** · **[Config Editor →](https://config-driven-recommendations-demo.vercel.app/editor)**
+**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)** · **[Config Editor →](https://config-driven-testimonials-demo.vercel.app/editor)**
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
@@ -179,7 +179,7 @@ config-driven-recommendations/
 ## Roadmap
 
 - [x] **Iteration 1** — Turborepo monorepo, TypeScript config schema, Zod validation, React component, unit tests
-- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-recommendations-demo.vercel.app/)
+- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-testimonials-demo.vercel.app/)
 - [x] **Iteration 3** — Visual config editor (`packages/editor`), split-screen `/editor` route, avatar upload, drag & drop reorder, import/export JSON
 - [x] **Iteration 4** — Webpack 5 Module Federation remote entry
 - [x] **Iteration 5** — Published to npm (`v1.0.0`), README, GitHub Actions CI/CD

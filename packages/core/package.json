@@ -1,6 +1,6 @@
 {
   "name": "config-driven-testimonials",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Config-driven React testimonials widget — drop in your config, get a polished UI",
   "keywords": ["testimonials", "react", "widget", "config-driven", "typescript"],
   "license": "MIT",

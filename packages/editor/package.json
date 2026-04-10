@@ -1,7 +1,14 @@
 {
   "name": "@config-driven-testimonials/editor",
-  "version": "0.0.2",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Visual config builder for config-driven-testimonials — import, edit, export JSON",
+  "keywords": ["testimonials", "editor", "react", "config-driven", "typescript"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KKeylin/config-driven-recommendations"
+  },
+  "files": ["dist", "README.md"],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

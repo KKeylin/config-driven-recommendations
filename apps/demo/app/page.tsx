@@ -19,7 +19,9 @@ export default function Home() {
         </svg>
         Edit
       </Link>
-      <TestimonialsWidget config={config} />
+      <div className="mx-auto max-w-3xl">
+        <TestimonialsWidget config={config} />
+      </div>
     </main>
   );
 }

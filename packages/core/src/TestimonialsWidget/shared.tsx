@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useState, useEffect } from 'react';
 import type { Testimonial, TestimonialSource, EndorsementWeight } from '@config-driven-testimonials/config-schema';
 

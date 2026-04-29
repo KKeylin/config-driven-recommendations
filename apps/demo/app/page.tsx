@@ -1,10 +1,18 @@
 import Link from 'next/link';
 import { TestimonialsWidget, parseConfig } from 'config-driven-testimonials';
 import configJson from '../testimonials.config.json';
+import { DeepLinkScroller } from './components/DeepLinkScroller';
 
 const config = parseConfig(configJson);
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const { highlight } = await searchParams;
+  const activeId = typeof highlight === 'string' ? highlight : undefined;
+
   return (
     <main
       className="min-h-screen bg-zinc-50 dark:bg-zinc-950 py-16 px-4"
@@ -20,7 +28,8 @@ export default function Home() {
         Edit
       </Link>
       <div className="mx-auto max-w-3xl">
-        <TestimonialsWidget config={config} />
+        <TestimonialsWidget config={config} activeTestimonialId={activeId} />
+        {activeId && <DeepLinkScroller id={activeId} />}
       </div>
     </main>
   );

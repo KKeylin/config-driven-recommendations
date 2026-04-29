@@ -93,9 +93,10 @@ testimonials-widget/
 - [x] README with usage examples and config reference
 - [x] GitHub Actions CI/CD (ci.yml + publish.yml)
 
-### Iteration 6 — Grouped / timeline view
-- [ ] `theme.variant: 'timeline'` — group testimonials by company with collapsible sections
-- [ ] Toggle between `cards` (flat list) and `timeline` (grouped by associatedRole.company + period)
+### Iteration 6 — Deep-link support ✓ DONE
+- [x] `?highlight=<id>` URL param — highlights the matching testimonial card (ring + bg) and scrolls it into view on load
+- [x] `activeTestimonialId` prop wired up in demo page via `searchParams` (Next.js 16 async prop)
+- [x] `DeepLinkScroller` client component handles `scrollIntoView` without adding hooks to the core widget
 
 ---
 

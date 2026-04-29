@@ -46,11 +46,12 @@ export interface EndorsementWeight {
 export type AssociatedRoleType = 'employment' | 'contract' | 'education' | 'side-project';
 
 export interface ThemeConfig {
-  variant: 'cards' | 'timeline' | 'masonry';
+  variant?: 'cards' | 'carousel' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
   backgroundColor?: string;
   showHeader?: boolean;
+  carouselInterval?: number;
   timeline?: {
     groupBy?: 'type' | 'company';
     include?: AssociatedRoleType[];

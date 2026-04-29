@@ -7,10 +7,9 @@ export interface ThemeFormProps {
   onChange: (theme: ThemeConfig) => void;
 }
 
-const VARIANT_OPTIONS: { value: ThemeConfig["variant"]; label: string }[] = [
+const VARIANT_OPTIONS: { value: NonNullable<ThemeConfig["variant"]>; label: string }[] = [
   { value: "cards", label: "Cards" },
-  { value: "masonry", label: "Masonry" },
-  { value: "timeline", label: "Timeline" },
+  { value: "carousel", label: "Carousel" },
 ];
 
 const COLOR_SCHEME_OPTIONS: { value: NonNullable<ThemeConfig["colorScheme"]>; label: string }[] = [
@@ -44,16 +43,12 @@ export function ThemeForm({ value, onChange }: ThemeFormProps): React.ReactEleme
     <section>
       <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400 mb-4">Settings</h2>
       <div className="flex flex-col gap-3">
-        <div title="Layout variants (masonry, timeline) are coming in a future version" className="cursor-not-allowed">
-          <div className="pointer-events-none opacity-40">
-            <Select
-              label="Variant"
-              value={theme.variant}
-              options={VARIANT_OPTIONS}
-              onChange={(v) => onChange({ ...theme, variant: v })}
-            />
-          </div>
-        </div>
+        <Select
+          label="Variant"
+          value={theme.variant ?? "cards"}
+          options={VARIANT_OPTIONS}
+          onChange={(v) => onChange({ ...theme, variant: v as NonNullable<ThemeConfig["variant"]> })}
+        />
         <Select
           label="Color scheme"
           value={colorScheme}

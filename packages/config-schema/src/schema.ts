@@ -44,11 +44,12 @@ export const TestimonialSchema = z.object({
 });
 
 export const ThemeConfigSchema = z.object({
-  variant: z.enum(['cards', 'timeline', 'masonry']),
+  variant: z.enum(['cards', 'carousel', 'timeline', 'masonry']).optional(),
   colorScheme: z.enum(['light', 'dark', 'auto']).optional(),
   accentColor: z.string().optional(),
   backgroundColor: z.string().optional(),
   showHeader: z.boolean().optional(),
+  carouselInterval: z.number().int().positive().optional(),
   timeline: z.object({
     groupBy: z.enum(['type', 'company']).optional(),
     include: z.array(AssociatedRoleTypeSchema).optional(),

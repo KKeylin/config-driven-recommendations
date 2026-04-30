@@ -60,7 +60,7 @@ export function ExportPanel({ config }: ExportPanelProps): React.ReactElement {
         )}
         {testimonialResults
           .filter((r) => !r.result.valid)
-          .map((r, i) => (
+          .map((r) => (
             <ErrorGroup
               key={r.testimonial.id}
               label={`#${config.testimonials.indexOf(r.testimonial) + 1} — ${r.testimonial.author?.name || "Unnamed"}`}

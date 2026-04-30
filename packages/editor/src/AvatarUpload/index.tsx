@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { ChangeEvent, DragEvent, ReactElement, useRef, useState } from "react";
 
 export interface AvatarUploadProps {
   value: string | undefined;
@@ -22,6 +22,8 @@ function resizeToBase64(file: File, size = 128): Promise<string> {
     const reader = new FileReader();
     reader.onerror = reject;
     reader.onload = (e) => {
+      const result = e.target?.result;
+      if (typeof result !== "string") { reject(new Error("Failed to read file")); return; }
       const img = new Image();
       img.onerror = reject;
       img.onload = () => {
@@ -36,13 +38,13 @@ function resizeToBase64(file: File, size = 128): Promise<string> {
         ctx.drawImage(img, sx, sy, min, min, 0, 0, size, size);
         resolve(canvas.toDataURL("image/jpeg", 0.85));
       };
-      img.src = e.target?.result as string;
+      img.src = result;
     };
     reader.readAsDataURL(file);
   });
 }
 
-export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): React.ReactElement {
+export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showUrlField, setShowUrlField] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -61,12 +63,12 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
     }
   }
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>): void {
     const file = e.target.files?.[0];
     if (file) handleFile(file);
   }
 
-  function handleDrop(e: React.DragEvent): void {
+  function handleDrop(e: DragEvent): void {
     e.preventDefault();
     const file = e.dataTransfer.files?.[0];
     if (file) handleFile(file);
@@ -78,8 +80,12 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
       <div className="flex items-center gap-4">
         {/* Preview */}
         <div
+          role="button"
+          tabIndex={0}
+          aria-label={value ? "Replace avatar — click or drop an image" : "Upload avatar — click or drop an image"}
           className="w-16 h-16 rounded-full shrink-0 overflow-hidden ring-2 ring-gray-100 cursor-pointer"
           onClick={() => inputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inputRef.current?.click(); } }}
           onDragOver={(e) => e.preventDefault()}
           onDrop={handleDrop}
           title="Click or drop to upload"

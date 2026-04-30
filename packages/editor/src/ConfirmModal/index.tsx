@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 
 export interface ConfirmModalProps {
   title: string;
@@ -16,7 +16,7 @@ export function ConfirmModal({
   cancelLabel = "Cancel",
   onConfirm,
   onCancel,
-}: ConfirmModalProps): React.ReactElement {
+}: ConfirmModalProps): ReactElement {
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent): void {
       if (e.key === "Escape") onCancel();

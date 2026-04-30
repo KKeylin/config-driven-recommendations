@@ -22,5 +22,5 @@ export function parseConfig(raw: unknown): TestimonialConfig {
     const messages = result.error.issues.map((i) => `  • ${i.path.join('.')}: ${i.message}`).join('\n');
     throw new Error(`Invalid testimonials config:\n${messages}`);
   }
-  return result.data as unknown as TestimonialConfig;
+  return result.data;
 }

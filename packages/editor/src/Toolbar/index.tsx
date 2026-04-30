@@ -1,17 +1,17 @@
-import React from "react";
+import { ReactElement, ReactNode } from "react";
 
 export type PanelId = "export" | "import";
 
 export interface ToolbarProps {
   activePanel: PanelId | null;
   onPanelChange: (id: PanelId | null) => void;
-  exportPanel?: React.ReactNode;
-  importPanel?: React.ReactNode;
+  exportPanel?: ReactNode;
+  importPanel?: ReactNode;
   onClearRequest?: () => void;
   backHref?: string;
 }
 
-export function Toolbar({ activePanel, onPanelChange, exportPanel, importPanel, onClearRequest, backHref }: ToolbarProps): React.ReactElement {
+export function Toolbar({ activePanel, onPanelChange, exportPanel, importPanel, onClearRequest, backHref }: ToolbarProps): ReactElement {
   function toggle(id: PanelId): void {
     onPanelChange(activePanel === id ? null : id);
   }
@@ -74,10 +74,10 @@ export function Toolbar({ activePanel, onPanelChange, exportPanel, importPanel, 
 interface ToolbarButtonProps {
   active: boolean;
   onClick: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-function ToolbarButton({ active, onClick, children }: ToolbarButtonProps): React.ReactElement {
+function ToolbarButton({ active, onClick, children }: ToolbarButtonProps): ReactElement {
   return (
     <button
       type="button"

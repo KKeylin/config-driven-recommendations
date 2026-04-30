@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type {
   Testimonial,
   TestimonialSource,
@@ -37,7 +37,7 @@ const SOURCE_TYPE_OPTIONS: { value: TestimonialSource["type"]; label: string }[]
   { value: "verbal", label: "Verbal" },
 ];
 
-export function TestimonialForm({ value, onChange }: TestimonialFormProps): React.ReactElement {
+export function TestimonialForm({ value, onChange }: TestimonialFormProps): ReactElement {
   function set<K extends keyof Testimonial>(key: K, val: Testimonial[K]): void {
     onChange({ ...value, [key]: val });
   }

@@ -27,16 +27,16 @@ export const TestimonialSourceSchema = z.discriminatedUnion('type', [
 export const AssociatedRoleTypeSchema = z.enum(['employment', 'contract', 'education', 'side-project']);
 
 export const TestimonialSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   author: PersonSchema,
-  text: z.string(),
-  relationship: z.string(),
-  date: z.string(),
+  text: z.string().min(1),
+  relationship: z.string().min(1),
+  date: z.string().min(1),
   source: TestimonialSourceSchema,
   recommendationUrl: z.string().url().optional(),
   associatedRole: z.object({
-    company: z.string(),
-    period: z.string(),
+    company: z.string().min(1),
+    period: z.string().min(1),
     type: AssociatedRoleTypeSchema,
     project: z.string().optional(),
   }),
@@ -49,7 +49,7 @@ export const ThemeConfigSchema = z.object({
   accentColor: z.string().optional(),
   backgroundColor: z.string().optional(),
   showHeader: z.boolean().optional(),
-  carouselInterval: z.number().int().positive().optional(),
+  carouselInterval: z.number().int().positive().max(60000).optional(),
   timeline: z.object({
     groupBy: z.enum(['type', 'company']).optional(),
     include: z.array(AssociatedRoleTypeSchema).optional(),
@@ -61,3 +61,11 @@ export const TestimonialConfigSchema = z.object({
   testimonials: z.array(TestimonialSchema),
   theme: ThemeConfigSchema.optional(),
 });
+
+export type Person = z.infer<typeof PersonSchema>;
+export type EndorsementWeight = z.infer<typeof EndorsementWeightSchema>;
+export type TestimonialSource = z.infer<typeof TestimonialSourceSchema>;
+export type AssociatedRoleType = z.infer<typeof AssociatedRoleTypeSchema>;
+export type Testimonial = z.infer<typeof TestimonialSchema>;
+export type ThemeConfig = z.infer<typeof ThemeConfigSchema>;
+export type TestimonialConfig = z.infer<typeof TestimonialConfigSchema>;

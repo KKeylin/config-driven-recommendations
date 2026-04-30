@@ -6,7 +6,7 @@ export type {
   EndorsementWeight,
   AssociatedRoleType,
   ThemeConfig,
-} from './types';
+} from './schema';
 
 export {
   PersonSchema,

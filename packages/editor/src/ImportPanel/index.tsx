@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { ChangeEvent, DragEvent, ReactElement, useRef, useState } from "react";
 import type { TestimonialConfig } from "@config-driven-testimonials/config-schema";
 import { TestimonialConfigSchema } from "@config-driven-testimonials/config-schema";
 
@@ -11,7 +11,7 @@ type ParseState =
   | { status: "valid"; config: TestimonialConfig; filename: string }
   | { status: "invalid"; errors: string[]; filename: string };
 
-export function ImportPanel({ onApply }: ImportPanelProps): React.ReactElement {
+export function ImportPanel({ onApply }: ImportPanelProps): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
   const [state, setState] = useState<ParseState>({ status: "idle" });
   const [dragging, setDragging] = useState(false);
@@ -32,7 +32,7 @@ export function ImportPanel({ onApply }: ImportPanelProps): React.ReactElement {
 
       const result = TestimonialConfigSchema.safeParse(parsed);
       if (result.success) {
-        setState({ status: "valid", config: result.data as TestimonialConfig, filename: file.name });
+        setState({ status: "valid", config: result.data, filename: file.name });
       } else {
         const errors = result.error.issues.map((i) => {
           const path = i.path.length ? `${i.path.join(".")}: ` : "";
@@ -44,12 +44,12 @@ export function ImportPanel({ onApply }: ImportPanelProps): React.ReactElement {
     reader.readAsText(file);
   }
 
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>): void {
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>): void {
     const file = e.target.files?.[0];
     if (file) processFile(file);
   }
 
-  function handleDrop(e: React.DragEvent): void {
+  function handleDrop(e: DragEvent): void {
     e.preventDefault();
     setDragging(false);
     const file = e.dataTransfer.files?.[0];

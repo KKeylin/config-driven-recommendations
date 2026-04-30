@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type { TestimonialConfig } from "@config-driven-testimonials/config-schema";
 import { HeaderForm } from "../HeaderForm/";
 import { TestimonialsList } from "../TestimonialsList";
@@ -12,7 +12,7 @@ export interface TestimonialsEditorProps {
   onAuthorFocus?: () => void;
 }
 
-export function TestimonialsEditor({ value, onChange, showValidation = false, onRecommendationOpen, onAuthorFocus }: TestimonialsEditorProps): React.ReactElement {
+export function TestimonialsEditor({ value, onChange, showValidation = false, onRecommendationOpen, onAuthorFocus }: TestimonialsEditorProps): ReactElement {
   const showHeader = value.theme?.showHeader !== false;
 
   return (

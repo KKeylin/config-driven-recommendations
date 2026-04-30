@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type { Person } from "@config-driven-testimonials/config-schema";
 import { Field, Textarea } from "../ui/fields.js";
 
@@ -10,7 +10,7 @@ export interface HeaderFormProps {
   onFocus?: () => void;
 }
 
-export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderChange, onFocus }: HeaderFormProps): React.ReactElement {
+export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderChange, onFocus }: HeaderFormProps): ReactElement {
   function set<K extends keyof Person>(key: K, val: Person[K]): void {
     onAuthorChange({ ...author, [key]: val });
   }

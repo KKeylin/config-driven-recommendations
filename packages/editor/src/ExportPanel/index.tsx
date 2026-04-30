@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type { TestimonialConfig } from "@config-driven-testimonials/config-schema";
 import { validateAuthor, validateTestimonial } from "../validate.js";
 
@@ -6,7 +6,7 @@ export interface ExportPanelProps {
   config: TestimonialConfig;
 }
 
-export function ExportPanel({ config }: ExportPanelProps): React.ReactElement {
+export function ExportPanel({ config }: ExportPanelProps): ReactElement {
   const authorResult = validateAuthor(config.author);
   const testimonialResults = config.testimonials.map((t) => ({
     testimonial: t,
@@ -77,7 +77,7 @@ interface ErrorGroupProps {
   errors: string[];
 }
 
-function ErrorGroup({ label, errors }: ErrorGroupProps): React.ReactElement {
+function ErrorGroup({ label, errors }: ErrorGroupProps): ReactElement {
   return (
     <li className="rounded-md bg-red-50 border border-red-200 px-4 py-3">
       <p className="text-sm font-semibold text-red-700 mb-1">{label}</p>

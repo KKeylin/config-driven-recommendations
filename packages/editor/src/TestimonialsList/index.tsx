@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { DragEvent, ReactElement, useRef, useState } from "react";
 import type { Testimonial } from "@config-driven-testimonials/config-schema";
 import { TestimonialForm } from "../TestimonialForm";
 import { validateTestimonial } from "../validate.js";
@@ -28,7 +28,7 @@ function createEmptyTestimonial(): Testimonial {
   };
 }
 
-export function TestimonialsList({ value, onChange, showValidation = false, onOpen }: TestimonialsListProps): React.ReactElement {
+export function TestimonialsList({ value, onChange, showValidation = false, onOpen }: TestimonialsListProps): ReactElement {
   const [openId, setOpenId] = useState<string | null>(null);
   const [dropPosition, setDropPosition] = useState<DropPosition | null>(null);
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
@@ -74,7 +74,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
     dragIndexRef.current = index;
   }
 
-  function handleDragOver(e: React.DragEvent, index: number): void {
+  function handleDragOver(e: DragEvent, index: number): void {
     e.preventDefault();
     if (dragIndexRef.current === null || dragIndexRef.current === index) return;
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
@@ -82,7 +82,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
     setDropPosition({ index, side });
   }
 
-  function handleDrop(e: React.DragEvent, index: number): void {
+  function handleDrop(e: DragEvent, index: number): void {
     e.preventDefault();
     const from = dragIndexRef.current;
     if (from === null || from === index) { reset(); return; }
@@ -139,10 +139,26 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
                   {/* Drag handle */}
                   <div
                     draggable
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Drag to reorder. Use Arrow Up or Arrow Down to move.`}
                     onDragStart={() => handleDragStart(index)}
                     onDragEnd={reset}
+                    onKeyDown={(e) => {
+                      if (e.key === "ArrowUp" && index > 0) {
+                        e.preventDefault();
+                        const next = value.slice();
+                        [next[index - 1], next[index]] = [next[index]!, next[index - 1]!];
+                        onChange(next);
+                      } else if (e.key === "ArrowDown" && index < value.length - 1) {
+                        e.preventDefault();
+                        const next = value.slice();
+                        [next[index], next[index + 1]] = [next[index + 1]!, next[index]!];
+                        onChange(next);
+                      }
+                    }}
                     title="Drag to reorder"
-                    className="shrink-0 pl-3 pr-1 py-3 cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-400 transition-colors"
+                    className="shrink-0 pl-3 pr-1 py-3 cursor-grab active:cursor-grabbing text-gray-300 hover:text-gray-400 transition-colors focus:outline-none focus:text-gray-500"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                       <circle cx="5.5" cy="4" r="1.2" />

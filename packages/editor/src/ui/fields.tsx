@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 
 interface FieldProps {
   label: string;
@@ -8,7 +8,7 @@ interface FieldProps {
   required?: boolean;
 }
 
-export function Field({ label, value, onChange, hint, required }: FieldProps): React.ReactElement {
+export function Field({ label, value, onChange, hint, required }: FieldProps): ReactElement {
   return (
     <label className="flex flex-col gap-1">
       <FieldLabel label={label} required={required} />
@@ -31,7 +31,7 @@ interface TextareaProps {
   required?: boolean;
 }
 
-export function Textarea({ label, value, onChange, rows = 4, required }: TextareaProps): React.ReactElement {
+export function Textarea({ label, value, onChange, rows = 4, required }: TextareaProps): ReactElement {
   return (
     <label className="flex flex-col gap-1">
       <FieldLabel label={label} required={required} />
@@ -53,7 +53,7 @@ interface SelectProps<T extends string> {
   required?: boolean;
 }
 
-export function Select<T extends string>({ label, value, options, onChange, required }: SelectProps<T>): React.ReactElement {
+export function Select<T extends string>({ label, value, options, onChange, required }: SelectProps<T>): ReactElement {
   return (
     <label className="flex flex-col gap-1">
       <FieldLabel label={label} required={required} />
@@ -78,7 +78,7 @@ interface ColorFieldProps {
   disabled?: boolean;
 }
 
-export function ColorField({ label, value, onChange, hint, disabled }: ColorFieldProps): React.ReactElement {
+export function ColorField({ label, value, onChange, hint, disabled }: ColorFieldProps): ReactElement {
   return (
     <div className={`flex flex-col gap-1 ${disabled ? 'opacity-40 pointer-events-none' : ''}`}>
       <FieldLabel label={label} />
@@ -113,7 +113,7 @@ export function ColorField({ label, value, onChange, hint, disabled }: ColorFiel
   );
 }
 
-function FieldLabel({ label, required }: { label: string; required?: boolean | undefined }): React.ReactElement {
+function FieldLabel({ label, required }: { label: string; required?: boolean | undefined }): ReactElement {
   return (
     <span className="text-xs font-medium text-gray-600 dark:text-zinc-400">
       {label}

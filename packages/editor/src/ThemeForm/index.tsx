@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type { ThemeConfig } from "@config-driven-testimonials/config-schema";
 import { Select, ColorField } from "../ui/fields.js";
 
@@ -24,7 +24,7 @@ const DEFAULT_BG: Record<"light" | "dark", string> = {
   dark: "#09090b",
 };
 
-export function ThemeForm({ value, onChange }: ThemeFormProps): React.ReactElement {
+export function ThemeForm({ value, onChange }: ThemeFormProps): ReactElement {
   const theme = value ?? DEFAULT_THEME;
   const colorScheme = theme.colorScheme ?? "auto";
   const isAuto = colorScheme === "auto";

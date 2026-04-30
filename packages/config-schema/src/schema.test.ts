@@ -99,4 +99,30 @@ describe('TestimonialConfigSchema', () => {
     const result = TestimonialConfigSchema.safeParse(config);
     expect(result.success).toBe(true);
   });
+
+  it('rejects empty testimonial text', () => {
+    const invalid = structuredClone(validConfig);
+    invalid.testimonials[0]!.text = '';
+    const result = TestimonialConfigSchema.safeParse(invalid);
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects empty relationship', () => {
+    const invalid = structuredClone(validConfig);
+    invalid.testimonials[0]!.relationship = '';
+    const result = TestimonialConfigSchema.safeParse(invalid);
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts empty author name (treated as not provided)', () => {
+    const config = { ...validConfig, author: { name: '' } };
+    const result = TestimonialConfigSchema.safeParse(config);
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects carouselInterval above 60000', () => {
+    const invalid = { ...validConfig, theme: { variant: 'carousel' as const, carouselInterval: 90000 } };
+    const result = TestimonialConfigSchema.safeParse(invalid);
+    expect(result.success).toBe(false);
+  });
 });

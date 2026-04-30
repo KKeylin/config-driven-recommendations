@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactElement } from "react";
 import type { Person } from "@config-driven-testimonials/config-schema";
 import { Field } from "../ui/fields.js";
 
@@ -8,7 +8,7 @@ export interface AuthorFormProps {
   onFocus?: () => void;
 }
 
-export function AuthorForm({ value, onChange, onFocus }: AuthorFormProps): React.ReactElement {
+export function AuthorForm({ value, onChange, onFocus }: AuthorFormProps): ReactElement {
   function set<K extends keyof Person>(key: K, val: Person[K]): void {
     onChange({ ...value, [key]: val });
   }

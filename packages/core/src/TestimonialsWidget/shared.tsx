@@ -55,7 +55,7 @@ export function Avatar({ name, avatarUrl, p }: { name?: string; avatarUrl?: stri
       {avatarUrl ? (
         <img
           src={avatarUrl}
-          alt={name ?? ''}
+          alt={name ? `Profile photo of ${name}` : 'Profile photo'}
           className={`${p}-avatar tw-reserved-avatar h-full w-full object-cover`}
         />
       ) : (
@@ -114,13 +114,13 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
         )}
       </div>
       <div className={`${p}-signature flex items-center justify-between`}>
-        <span className="text-xs text-zinc-400 dark:text-zinc-500">{formatDate(testimonial.date)}</span>
-        <span className="text-sm italic text-zinc-400 dark:text-zinc-500">— {author.name}</span>
+        <span className="text-xs text-zinc-600 dark:text-zinc-400">{formatDate(testimonial.date)}</span>
+        <span className="text-sm italic text-zinc-600 dark:text-zinc-400">— {author.name}</span>
       </div>
       <div className="flex items-start gap-4 border-t border-zinc-100 pt-4 dark:border-zinc-800">
         <div className="relative shrink-0">
           {author.linkedinUrl ? (
-            <a href={author.linkedinUrl} target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-80">
+            <a href={author.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label={author.name ? `View ${author.name}'s LinkedIn profile` : 'View LinkedIn profile'} className="transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:rounded-full">
               <Avatar {...(author.name ? { name: author.name } : {})} {...(author.avatarUrl ? { avatarUrl: author.avatarUrl } : {})} p={p} />
             </a>
           ) : (
@@ -141,7 +141,7 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
               href={author.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${p}-author-name font-semibold text-zinc-900 dark:text-zinc-100`}
+              className={`${p}-author-name font-semibold text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:rounded`}
             >
               {author.name}
             </a>
@@ -154,11 +154,11 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
             {author.title}
           </span>
           {author.currentRole && (
-            <span className={`${p}-author-role text-sm text-zinc-400 dark:text-zinc-500`}>
+            <span className={`${p}-author-role text-sm text-zinc-600 dark:text-zinc-400`}>
               Now: {author.currentRole.title} at {author.currentRole.company}
             </span>
           )}
-          <span className={`${p}-meta mt-1 text-xs text-zinc-400 dark:text-zinc-500`}>
+          <span className={`${p}-meta mt-1 text-xs text-zinc-600 dark:text-zinc-400`}>
             {testimonial.relationship} · {testimonial.associatedRole.company}, {testimonial.associatedRole.period}
           </span>
           <div className="mt-2 flex items-center gap-2">
@@ -167,12 +167,12 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${p}-source inline-flex items-center gap-1 rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800`}
+                className={`${p}-source inline-flex items-center gap-1 rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}
               >
                 {sourceLabel} ↗
               </a>
             ) : (
-              <span className={`${p}-source text-xs text-zinc-400 dark:text-zinc-500`}>
+              <span className={`${p}-source text-xs text-zinc-600 dark:text-zinc-400`}>
                 {sourceLabel}
               </span>
             )}

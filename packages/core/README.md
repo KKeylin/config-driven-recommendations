@@ -6,10 +6,13 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 - **Zero infrastructure** — your data lives in one `.json` file, not in a server
 - **Truly portable** — works on Vercel, GitHub Pages, S3, or any static host
 - **Self-contained avatars** — images are base64-encoded inside the config, no external storage needed
-- **Configure once, reuse forever** — drop in a new host app, point at the same config, done
+- **Configure once, reuse everywhere** — drop in a new host app, point at the same config, done
+- **Multiple display variants** — `cards`, `carousel` (3D fan, auto-advance, swipe), `timeline`, `masonry`
+- **Accessible by default** — WCAG 2.1 Level AA compliant
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
+[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG_2.1-Level_AA-brightgreen)](https://www.w3.org/WAI/WCAG21/Understanding/)
 
 ---
 
@@ -142,13 +145,29 @@ interface EndorsementWeight {
 
 ```ts
 interface ThemeConfig {
-  variant: 'cards' | 'timeline' | 'masonry';
+  variant?: 'cards' | 'carousel' | 'timeline' | 'masonry';  // default: 'cards'
   colorScheme?: 'light' | 'dark' | 'auto';  // default: 'auto'
-  accentColor?: string;       // CSS color value, e.g. '#6366f1'
-  backgroundColor?: string;   // overrides the page background behind the widget
-  showHeader?: boolean;       // default: true
+  accentColor?: string;         // CSS color value, e.g. '#6366f1'
+  backgroundColor?: string;     // overrides the page background behind the widget
+  showHeader?: boolean;         // default: true
+  carouselInterval?: number;    // auto-advance interval in ms (1–60 000); default: 5000
+  timeline?: {
+    groupBy?: 'type' | 'company';
+    include?: ('employment' | 'contract' | 'education' | 'side-project')[];
+  };
 }
 ```
+
+---
+
+## Display variants
+
+| Variant | Description |
+|---|---|
+| `cards` | Stacked cards with fade-in animation. Default. |
+| `carousel` | 3D fan layout. Active card is centred; adjacent cards are scaled and dimmed. Auto-advances every `carouselInterval` ms. Pause/play button included. Swipe on touch devices. |
+| `timeline` | Cards grouped by role type or company, ordered chronologically. |
+| `masonry` | Pinterest-style column layout. |
 
 ---
 
@@ -156,7 +175,7 @@ interface ThemeConfig {
 
 Every rendered element receives a semantic class prefixed by `classPrefix` (default `'t'`): `t-card`, `t-text`, `t-avatar`, `t-badge`, etc. Override any of them in your stylesheet:
 
-```css
+```
 .t-card {
   border-radius: 16px;
 }

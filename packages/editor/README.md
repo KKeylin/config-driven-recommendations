@@ -8,10 +8,12 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 - **Avatar upload built-in** — center-crops and encodes to base64 automatically
 - **Import / export JSON** — with full Zod validation and per-field error messages
 - **Drag & drop reordering** — native HTML5, no extra dependencies
-- **Live preview** — see exactly what the widget will look like as you type
+- **Live preview** — see exactly what the widget will look like as you type, including all display variants
+- **Accessible** — keyboard-navigable, ARIA-labelled controls, WCAG 2.1 Level AA compliant
 
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/@config-driven-testimonials/editor)](./LICENSE)
+[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG_2.1-Level_AA-brightgreen)](https://www.w3.org/WAI/WCAG21/Understanding/)
 
 ---
 

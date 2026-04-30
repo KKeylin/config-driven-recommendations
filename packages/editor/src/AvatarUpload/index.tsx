@@ -91,7 +91,7 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
           title="Click or drop to upload"
         >
           {value ? (
-            <img src={value} alt={name} className="w-full h-full object-cover" />
+            <img src={value} alt={name ? `Profile photo of ${name}` : 'Profile photo'} className="w-full h-full object-cover" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-lg font-semibold">
               {getInitials(name ?? "")}

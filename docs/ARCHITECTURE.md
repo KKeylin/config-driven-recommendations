@@ -98,6 +98,38 @@ testimonials-widget/
 - [x] `activeTestimonialId` prop wired up in demo page via `searchParams` (Next.js 16 async prop)
 - [x] `DeepLinkScroller` client component handles `scrollIntoView` without adding hooks to the core widget
 
+### Iteration 7 — Carousel variant + package polish ✓ DONE
+- [x] `carousel` added to `ThemeConfig.variant`; `carouselInterval` field (1–60 000 ms)
+- [x] `TestimonialsWidget` refactored into `CardsView` / `CarouselView` / `shared` modules
+- [x] `CarouselView`: 3D fan layout (center card full opacity, ±1 scaled at 0.85/0.5, ±2 at 0.72/0.2), CSS `translateX` + `scale` transitions
+- [x] Expand-on-hover: active card collapses to 3 lines, expands to full text on hover via `max-height` animation to measured `scrollHeight`
+- [x] Auto-advance with `setInterval`; pauses on mouse hover over carousel
+- [x] Dot navigation with `role="tablist"` / `role="tab"` ARIA pattern
+- [x] ESLint 9 flat config added to `packages/core` and `packages/editor`
+- [x] All TypeScript types derived from Zod schemas via `z.infer<>` — deleted manual `types.ts`; single source of truth eliminates schema/type drift
+- [x] `min(1)` Zod constraints on required Testimonial fields (`id`, `text`, `relationship`, `date`, `company`, `period`)
+- [x] Missing prop type exports added to `packages/editor` public API
+
+### Iteration 8 — WCAG 2.1 Level AA / EN 301 549 compliance ✓ DONE
+
+**Level A:**
+- [x] **2.2.2 Pause, Stop, Hide** — pause/play toggle button on carousel; `aria-pressed` reflects state
+- [x] **4.1.2 Name, Role, Value** — carousel root: `role="region"` + `aria-label`; dots: `aria-label="Slide N of M: Name"`; active slide: `aria-current="true"`
+- [x] **1.1.1 Non-text Content** — avatar `alt` changed to `"Profile photo of Name"` / `"Profile photo"` in widget and editor
+- [x] **1.3.1 Info and Relationships** — carousel slides wrapped in `<ul>/<li>`; cards view was already compliant
+- [x] **2.4.4 Link Purpose** — avatar LinkedIn link gets `aria-label="View Name's LinkedIn profile"`
+
+**Level AA:**
+- [x] **1.4.3 Minimum Contrast** — `text-zinc-400 dark:text-zinc-500` → `text-zinc-600 dark:text-zinc-400` on all muted body text (date, attribution, meta, current role, source label); zinc-600 on white = 7.0:1, zinc-400 on zinc-900 = 5.7:1
+- [x] **2.4.7 Focus Visible** — `focus-visible:ring-2 focus-visible:ring-blue-400` added to avatar link, author name link, source link, carousel dot buttons, pause button
+- [x] **1.4.10 Reflow** — verified: no horizontal scroll at 320 px viewport width
+
+**Carousel UX (mobile):**
+- [x] Touch swipe left/right to navigate slides (50 px threshold, `onTouchStart` / `onTouchEnd`)
+- [x] Text collapse disabled on touch devices (`window.matchMedia('(hover: hover)')`) — full card text shown immediately
+- [x] Height anchor tracks hover/device state — container grows with expanded card, navigation never overlapped
+- [x] `IntersectionObserver` on carousel root — auto-advance pauses when component is fully scrolled out of viewport, preventing layout shift in content below
+
 ---
 
 ## Config shape
@@ -149,11 +181,12 @@ export type TestimonialSource =
   | { type: 'verbal'; contactAvailable?: boolean };
 
 export interface ThemeConfig {
-  variant: 'cards' | 'timeline' | 'masonry';
+  variant?: 'cards' | 'carousel' | 'timeline' | 'masonry';
   colorScheme?: 'light' | 'dark' | 'auto';
   accentColor?: string;
   backgroundColor?: string;         // overrides page background behind the widget
-  showHeader?: boolean;           // default true; set false to hide the header (embed cards only)
+  showHeader?: boolean;             // default true; set false to hide the header (embed cards only)
+  carouselInterval?: number;        // auto-advance interval in ms; max 60 000 (60 s); default 5000
   timeline?: {
     groupBy?: 'type' | 'company';
     include?: AssociatedRoleType[];  // filter: show only these role types
@@ -165,7 +198,7 @@ export interface ThemeConfig {
 
 ## packages/editor — public API
 
-```typescript
+```tsx
 // Main editor component
 <TestimonialsEditor
   value={config}
@@ -238,15 +271,14 @@ new ModuleFederationPlugin({
 ```
 
 **Usage in host component:**
-```tsx
+```jsx
 import React, { Suspense, lazy } from 'react';
-import type { TestimonialConfig } from 'testimonialsRemote/TestimonialsWidget';
 
 const TestimonialsWidget = lazy(() =>
   import('testimonialsRemote/TestimonialsWidget').then((m) => ({ default: m.TestimonialsWidget }))
 );
 
-const config: TestimonialConfig = { /* ... */ };
+const config = { /* your TestimonialConfig */ };
 
 export function App() {
   return (
@@ -279,6 +311,9 @@ export function App() {
 | Avatar resize | Canvas API | No deps, runs in browser, center-crop to 128×128 JPEG |
 | DnD reorder | HTML5 native DnD | No deps, sufficient for list reordering |
 | Import validation | Zod `safeParse` | Structured error messages per field |
+| TypeScript types | `z.infer<>` from Zod schemas | Single source of truth — eliminates manual type drift |
+| Linting | ESLint 9 flat config + `@typescript-eslint` | Consistent rules across core and editor packages |
+| Accessibility standard | WCAG 2.1 Level AA / EN 301 549 | Enterprise and government deployment readiness |
 
 ---
 

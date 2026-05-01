@@ -27,7 +27,7 @@ export const levelColors: Record<EndorsementWeight['level'], string> = {
   'colleague': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
   'lead':      'bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
   'manager':   'bg-violet-50 text-violet-800 dark:bg-violet-950 dark:text-violet-300',
-  'director':  'bg-orange-50 text-orange-800 dark:bg-orange-950 dark:text-orange-300',
+  'director':  'bg-orange-50 text-orange-900 dark:bg-orange-950 dark:text-orange-300',
   'vp':        'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300',
   'c-level':   'bg-amber-50 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
 };

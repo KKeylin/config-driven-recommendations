@@ -12,6 +12,9 @@ node_modules/
 dist/
 .turbo/
 
+# Test coverage
+coverage/
+
 # Env files
 .env
 .env.local

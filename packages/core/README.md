@@ -18,9 +18,9 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 
 ### See it in action
 
-> **[▶ Live demo](https://config-driven-testimonials-demo.vercel.app)**
+**[▶ Live demo](https://config-driven-testimonials-demo.vercel.app)**
 
-> **[✏ Try the visual editor — build your config in minutes, export JSON, drop it in](https://config-driven-testimonials-demo.vercel.app/editor)**
+**[▶ Try the visual editor — build your config in minutes, export JSON, drop it in](https://config-driven-testimonials-demo.vercel.app/editor)**
 
 ---
 

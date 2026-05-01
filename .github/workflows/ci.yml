@@ -37,3 +37,14 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Coverage
+        run: pnpm --filter config-driven-testimonials run test -- --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: packages/core/coverage/lcov.info
+          flags: core
+          fail_ci_if_error: false

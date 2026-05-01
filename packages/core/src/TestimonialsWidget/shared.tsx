@@ -22,14 +22,14 @@ export function formatSourceLabel(source: TestimonialSource): string {
 }
 
 export const levelColors: Record<EndorsementWeight['level'], string> = {
-  'report':    'bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300',
-  'mentee':    'bg-teal-50 text-teal-700 dark:bg-teal-950 dark:text-teal-300',
-  'colleague': 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300',
-  'lead':      'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
-  'manager':   'bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
-  'director':  'bg-orange-50 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
-  'vp':        'bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300',
-  'c-level':   'bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300',
+  'report':    'bg-teal-50 text-teal-800 dark:bg-teal-950 dark:text-teal-300',
+  'mentee':    'bg-teal-50 text-teal-800 dark:bg-teal-950 dark:text-teal-300',
+  'colleague': 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300',
+  'lead':      'bg-blue-50 text-blue-800 dark:bg-blue-950 dark:text-blue-300',
+  'manager':   'bg-violet-50 text-violet-800 dark:bg-violet-950 dark:text-violet-300',
+  'director':  'bg-orange-50 text-orange-800 dark:bg-orange-950 dark:text-orange-300',
+  'vp':        'bg-red-50 text-red-800 dark:bg-red-950 dark:text-red-300',
+  'c-level':   'bg-amber-50 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
 };
 
 const initialsColors = [
@@ -150,7 +150,7 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
               {author.name}
             </span>
           )}
-          <span className={`${p}-author-title text-sm text-zinc-500 dark:text-zinc-400`}>
+          <span className={`${p}-author-title text-sm text-zinc-600 dark:text-zinc-300`}>
             {author.title}
           </span>
           {author.currentRole && (
@@ -167,7 +167,8 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
                 href={sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${p}-source inline-flex items-center gap-1 rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}
+                aria-label={author.name ? `LinkedIn recommendation from ${author.name}` : sourceLabel}
+              className={`${p}-source inline-flex items-center gap-1 rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-600 dark:hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400`}
               >
                 {sourceLabel} ↗
               </a>

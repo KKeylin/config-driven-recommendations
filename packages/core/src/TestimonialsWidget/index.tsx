@@ -26,9 +26,9 @@ export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonia
           >
             {config.author.name}
           </h2>
-          <p className="mt-2 text-zinc-500 dark:text-zinc-400">{config.author.title}</p>
+          <p className="mt-2 text-zinc-600 dark:text-zinc-300">{config.author.title}</p>
           {config.author.summary && (
-            <p className="mt-3 max-w-xl mx-auto text-sm text-zinc-500 dark:text-zinc-400 whitespace-pre-wrap bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm rounded-xl px-4 py-3">
+            <p className="mt-3 max-w-xl mx-auto text-sm text-zinc-600 dark:text-zinc-300 whitespace-pre-wrap bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm rounded-xl px-4 py-3">
               {config.author.summary}
             </p>
           )}

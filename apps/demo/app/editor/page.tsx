@@ -127,6 +127,7 @@ export default function EditorPage() {
 
   return (
     <>
+      <h1 className="sr-only">Testimonials Editor</h1>
       <Toolbar
         activePanel={activePanel}
         onPanelChange={setActivePanel}

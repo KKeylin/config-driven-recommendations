@@ -13,6 +13,7 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
 [![WCAG Checked](https://achecker.ca/api/v1/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1/badge)](https://achecker.ca/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1)
+[![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
 
 ---
 

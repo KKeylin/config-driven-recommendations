@@ -9,6 +9,7 @@ No database. No API. No CMS. Configure once — deploy anywhere.
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
 [![WCAG Checked](https://achecker.ca/api/v1/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1/badge)](https://achecker.ca/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1)
+[![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
 
 A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.json` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
 

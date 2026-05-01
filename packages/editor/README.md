@@ -13,7 +13,7 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/@config-driven-testimonials/editor)](./LICENSE)
-[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG_2.1-Level_AA-brightgreen)](https://www.w3.org/WAI/WCAG21/Understanding/)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/0a1ffb45-5182-4fb8-8405-3f44cd106f5b/badge)](https://achecker.ca/scan/0a1ffb45-5182-4fb8-8405-3f44cd106f5b)
 
 ---
 

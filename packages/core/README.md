@@ -12,7 +12,7 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
-[![WCAG 2.1 AA](https://img.shields.io/badge/WCAG_2.1-Level_AA-brightgreen)](https://www.w3.org/WAI/WCAG21/Understanding/)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a/badge)](https://achecker.ca/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a)
 
 ---
 

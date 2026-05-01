@@ -8,6 +8,7 @@ No database. No API. No CMS. Configure once — deploy anywhere.
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a/badge)](https://achecker.ca/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a)
 
 A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.json` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
 
@@ -31,14 +32,26 @@ The config is validated at runtime with Zod — wrong data structure gives you a
 
 ## Quick start
 
-```ts
+**Option A — load from JSON file:**
+
+```tsx
 import { TestimonialsWidget, parseConfig } from 'config-driven-testimonials';
 import configJson from './testimonials.config.json';
 
 const config = parseConfig(configJson);
 
-// or write the config inline:
-const config = {
+export default function App() {
+  return <TestimonialsWidget config={config} />;
+}
+```
+
+**Option B — inline config:**
+
+```tsx
+import { TestimonialsWidget } from 'config-driven-testimonials';
+import type { TestimonialConfig } from 'config-driven-testimonials';
+
+const config: TestimonialConfig = {
   author: {
     name: 'Your Name',
     title: 'Senior Engineer',
@@ -77,7 +90,7 @@ export default function App() {
   return <TestimonialsWidget config={config} />;
   // custom class prefix:
   // return <TestimonialsWidget config={config} classPrefix="my" />;
-  // → classes become: my-card, my-text, my-avatar, my-badge, etc.
+  // → classes becomes: my-card, my-text, my-avatar, my-badge, etc.
 }
 ```
 

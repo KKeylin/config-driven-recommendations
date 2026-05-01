@@ -8,11 +8,11 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 - **Self-contained avatars** — images are base64-encoded inside the config, no external storage needed
 - **Configure once, reuse everywhere** — drop in a new host app, point at the same config, done
 - **Multiple display variants** — `cards`, `carousel` (3D fan, auto-advance, swipe), `timeline`, `masonry`
-- **Accessible by default** — WCAG 2.1 Level AA compliant
+- **Accessible by default** — WCAG 2.2 Level AAA compliant
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
-[![WCAG Checked](https://achecker.ca/api/v1/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a/badge)](https://achecker.ca/scan/11db60c5-bd9c-4567-a4f7-3ca4478bcc0a)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1/badge)](https://achecker.ca/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1)
 
 ---
 

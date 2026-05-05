@@ -8,7 +8,7 @@ No database. No API. No CMS. Configure once — deploy anywhere.
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
-[![WCAG Checked](https://achecker.ca/api/v1/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d/badge)](https://achecker.ca/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d)
+![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA_100%2F100-brightgreen)
 [![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
 [![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen?logo=lighthouse)](https://cdt.koskei.com/)
 

@@ -14,6 +14,7 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
 [![WCAG Checked](https://achecker.ca/api/v1/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d/badge)](https://achecker.ca/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d)
 [![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
+[![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen?logo=lighthouse)](https://cdt.koskei.com/)
 
 ---
 

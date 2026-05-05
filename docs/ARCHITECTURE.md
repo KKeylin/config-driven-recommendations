@@ -110,7 +110,7 @@ testimonials-widget/
 - [x] `min(1)` Zod constraints on required Testimonial fields (`id`, `text`, `relationship`, `date`, `company`, `period`)
 - [x] Missing prop type exports added to `packages/editor` public API
 
-### Iteration 8 — WCAG 2.1 Level AA / EN 301 549 compliance ✓ DONE
+### Iteration 8 — WCAG 2.2 Level AAA compliance ✓ DONE
 
 **Level A:**
 - [x] **2.2.2 Pause, Stop, Hide** — pause/play toggle button on carousel; `aria-pressed` reflects state
@@ -313,7 +313,7 @@ export function App() {
 | Import validation | Zod `safeParse` | Structured error messages per field |
 | TypeScript types | `z.infer<>` from Zod schemas | Single source of truth — eliminates manual type drift |
 | Linting | ESLint 9 flat config + `@typescript-eslint` | Consistent rules across core and editor packages |
-| Accessibility standard | WCAG 2.1 Level AA / EN 301 549 | Enterprise and government deployment readiness |
+| Accessibility standard | WCAG 2.2 Level AAA | Enterprise and government deployment readiness |
 
 ---
 

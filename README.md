@@ -3,12 +3,12 @@
 **A polished React testimonials widget powered entirely by a single JSON config.**
 No database. No API. No CMS. Configure once — deploy anywhere.
 
-**[Live Demo →](https://config-driven-testimonials-demo.vercel.app/)** · **[Config Editor →](https://config-driven-testimonials-demo.vercel.app/editor)**
+**[Live Demo →](https://cdt.koskei.com/)** · **[Config Editor →](https://cdt.koskei.com/editor)**
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor?label=%40config-driven-testimonials%2Feditor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
-[![WCAG Checked](https://achecker.ca/api/v1/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1/badge)](https://achecker.ca/scan/716dcb7f-668d-4ce4-b2ed-58b1f9d773a1)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d/badge)](https://achecker.ca/scan/c9c44959-8e2d-4da4-b956-8d143d4b168d)
 [![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
 
 A reusable, config-driven React component that renders LinkedIn-style testimonials in a polished UI. Fill in your own `testimonials.config.json` — no code changes needed beyond the config. Use the visual editor to build and export a config without touching code.
@@ -193,7 +193,7 @@ config-driven-recommendations/
 ## Roadmap
 
 - [x] **Iteration 1** — Turborepo monorepo, TypeScript config schema, Zod validation, React component, unit tests
-- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [deployed to Vercel](https://config-driven-testimonials-demo.vercel.app/)
+- [x] **Iteration 2** — Next.js demo app, real testimonials data, Tailwind UI, [live demo](https://cdt.koskei.com/)
 - [x] **Iteration 3** — Visual config editor (`packages/editor`), split-screen `/editor` route, avatar upload, drag & drop reorder, import/export JSON
 - [x] **Iteration 4** — Webpack 5 Module Federation remote entry
 - [x] **Iteration 5** — Published to npm (`v1.0.0`), README, GitHub Actions CI/CD

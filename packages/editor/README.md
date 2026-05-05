@@ -13,13 +13,13 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/@config-driven-testimonials/editor)](./LICENSE)
-[![WCAG Checked](https://achecker.ca/api/v1/scan/0a1ffb45-5182-4fb8-8405-3f44cd106f5b/badge)](https://achecker.ca/scan/0a1ffb45-5182-4fb8-8405-3f44cd106f5b)
+[![WCAG Checked](https://achecker.ca/api/v1/scan/6dc6515f-4501-4cc4-8955-ed8e5cf1fc26/badge)](https://achecker.ca/scan/6dc6515f-4501-4cc4-8955-ed8e5cf1fc26)
 
 ---
 
 ### Try it without installing
 
-> **[✏ Open the hosted editor](https://config-driven-testimonials-demo.vercel.app/editor)**
+> **[✏ Open the hosted editor](https://cdt.koskei.com/editor)**
 
 ---
 

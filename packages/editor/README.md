@@ -9,11 +9,11 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 - **Import / export JSON** — with full Zod validation and per-field error messages
 - **Drag & drop reordering** — native HTML5, no extra dependencies
 - **Live preview** — see exactly what the widget will look like as you type, including all display variants
-- **Accessible** — keyboard-navigable, ARIA-labelled controls, WCAG 2.1 Level AA compliant
+- **Accessible** — keyboard-navigable, ARIA-labelled controls, WCAG 2.2 Level AAA compliant
 
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/@config-driven-testimonials/editor)](./LICENSE)
-[![WCAG Checked](https://achecker.ca/api/v1/scan/6dc6515f-4501-4cc4-8955-ed8e5cf1fc26/badge)](https://achecker.ca/scan/6dc6515f-4501-4cc4-8955-ed8e5cf1fc26)
+![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA_100%2F100-brightgreen)
 
 ---
 

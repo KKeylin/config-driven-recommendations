@@ -12,6 +12,7 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 
 [![npm](https://img.shields.io/npm/v/config-driven-testimonials)](https://www.npmjs.com/package/config-driven-testimonials)
 [![license](https://img.shields.io/npm/l/config-driven-testimonials)](./LICENSE)
+![styles bundled](https://img.shields.io/badge/styles-bundled-06B6D4?logo=tailwindcss&logoColor=white)
 ![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA_100%2F100-brightgreen)
 [![Coverage](https://codecov.io/gh/KKeylin/config-driven-recommendations/branch/main/graph/badge.svg)](https://codecov.io/gh/KKeylin/config-driven-recommendations)
 [![Lighthouse](https://img.shields.io/badge/Lighthouse-100%2F100-brightgreen?logo=lighthouse)](https://cdt.koskei.com/)
@@ -26,7 +27,9 @@ No database. No API. No CMS. Avatars are embedded in the config as base64 — de
 
 ---
 
-## Install
+## Getting started
+
+### 1. Install
 
 ```bash
 npm install config-driven-testimonials
@@ -36,9 +39,17 @@ pnpm add config-driven-testimonials
 
 React 18+ is a peer dependency.
 
----
+### 2. Import the stylesheet
 
-## Quick start
+The widget ships with its own CSS — import it once at the root of your app (e.g. `main.tsx`, `layout.tsx`, `_app.tsx`):
+
+```ts
+import 'config-driven-testimonials/styles';
+```
+
+No Tailwind setup required in your project. The styles are pre-built and self-contained.
+
+### 3. Use the widget
 
 ```tsx
 import { TestimonialsWidget, parseConfig } from 'config-driven-testimonials';

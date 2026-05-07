@@ -1,6 +1,6 @@
 {
   "name": "config-driven-testimonials",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Config-driven React testimonials widget — drop in your config, get a polished UI",
   "keywords": [
     "testimonials",
@@ -24,11 +24,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./styles": "./dist/styles.css"
+    }
   },
   "scripts": {
-    "build": "tsc && tailwindcss -i src/styles.css -o dist/styles.css --minify",
+    "build": "tailwindcss -i src/styles.css -o dist/styles.css --minify && node scripts/css-to-ts.mjs && tsc",
     "dev": "tsc --watch",
     "lint": "eslint src",
     "test": "vitest run",

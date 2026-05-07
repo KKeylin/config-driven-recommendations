@@ -12,6 +12,9 @@ node_modules/
 dist/
 .turbo/
 
+# Generated files
+packages/core/src/generated/
+
 # Test coverage
 coverage/
 

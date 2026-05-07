@@ -1,6 +1,8 @@
 import type { TestimonialsWidgetProps } from './TestimonialsWidget.types';
 import { CardsView } from './CardsView';
 import { CarouselView } from './CarouselView';
+import { StyleInjector } from './StyleInjector';
+import { widgetStyles } from '../generated/styles';
 
 export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonialId }: TestimonialsWidgetProps): React.ReactElement {
   const p = classPrefix;
@@ -13,8 +15,10 @@ export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonia
     ...(backgroundColor ? { backgroundColor } : {}),
   };
   return (
-    <div
-      data-testid="testimonials-widget"
+    <>
+      <StyleInjector css={widgetStyles} />
+      <div
+        data-testid="testimonials-widget"
       className={`${p}-widget mx-auto max-w-3xl${colorScheme === 'dark' ? ' dark' : colorScheme === 'light' ? ' light' : ''}`}
       {...(Object.keys(rootStyle).length ? { style: rootStyle } : {})}
     >
@@ -66,6 +70,7 @@ export function TestimonialsWidget({ config, classPrefix = 't', activeTestimonia
           activeTestimonialId={activeTestimonialId}
         />
       )}
-    </div>
+      </div>
+    </>
   );
 }

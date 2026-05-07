@@ -37,19 +37,9 @@ npm install config-driven-testimonials
 pnpm add config-driven-testimonials
 ```
 
-React 18+ is a peer dependency.
+React 18+ is a peer dependency. No Tailwind setup required — styles are bundled inside the component.
 
-### 2. Import the stylesheet
-
-The widget ships with its own CSS — import it once at the root of your app (e.g. `main.tsx`, `layout.tsx`, `_app.tsx`):
-
-```ts
-import 'config-driven-testimonials/styles';
-```
-
-No Tailwind setup required in your project. The styles are pre-built and self-contained.
-
-### 3. Use the widget
+### 2. Use the widget
 
 ```tsx
 import { TestimonialsWidget, parseConfig } from 'config-driven-testimonials';

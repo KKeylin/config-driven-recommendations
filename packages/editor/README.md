@@ -32,7 +32,7 @@ npm install @config-driven-testimonials/editor
 pnpm add @config-driven-testimonials/editor
 ```
 
-React 18+ is a peer dependency. Requires Tailwind CSS v4 in the host app.
+React 18+ is a peer dependency.
 
 ---
 

@@ -1,4 +1,6 @@
 import { ReactElement, ReactNode } from "react";
+import { StyleInjector } from "../StyleInjector";
+import { editorStyles } from "../generated/styles.js";
 
 export type PanelId = "export" | "import";
 
@@ -18,6 +20,7 @@ export function Toolbar({ activePanel, onPanelChange, exportPanel, importPanel, 
 
   return (
     <>
+      <StyleInjector css={editorStyles} />
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center gap-2 px-6 h-12 bg-slate-800">
         <h1 className="text-sm font-semibold text-slate-300 mr-4">Recommendations Editor</h1>
         <ToolbarButton active={activePanel === "export"} onClick={() => toggle("export")}>

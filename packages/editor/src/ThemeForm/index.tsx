@@ -42,7 +42,7 @@ export function ThemeForm({ value, onChange }: ThemeFormProps): ReactElement {
 
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400 mb-4">Settings</h2>
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-4">Settings</h2>
       <div className="flex flex-col gap-3">
         <Select
           label="Variant"

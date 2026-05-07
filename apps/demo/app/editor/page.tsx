@@ -24,8 +24,8 @@ function EditorNotice(): React.ReactElement {
       <div className="flex-1 min-w-0">
         <p className="text-xs text-amber-700 dark:text-amber-300">
           Changes here <strong>won&apos;t affect the demo site.</strong> This is a config builder —
-          use <strong>Export</strong> to download your <code className="font-mono bg-amber-100 dark:bg-amber-900 px-1 rounded">testimonials.config.json</code>,
-          then load it into your own project alongside the <code className="font-mono bg-amber-100 dark:bg-amber-900 px-1 rounded">config-driven-testimonials</code> package.
+          use <strong>Export</strong> to download your <code className="font-mono bg-amber-100 dark:bg-amber-900 px-1 rounded text-amber-900 dark:text-amber-100">testimonials.config.json</code>,
+          then load it into your own project alongside the <code className="font-mono bg-amber-100 dark:bg-amber-900 px-1 rounded text-amber-900 dark:text-amber-100">config-driven-testimonials</code> package.
         </p>
       </div>
       <div className="group relative shrink-0">
@@ -127,7 +127,6 @@ export default function EditorPage() {
 
   return (
     <>
-      <h1 className="sr-only">Testimonials Editor</h1>
       <Toolbar
         activePanel={activePanel}
         onPanelChange={setActivePanel}

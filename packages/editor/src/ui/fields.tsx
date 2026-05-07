@@ -39,7 +39,7 @@ export function Textarea({ label, value, onChange, rows = 4, required }: Textare
         value={value}
         rows={rows}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-y dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100 dark:focus:border-blue-400"
+        className="rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-y dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100 dark:focus:border-blue-400"
       />
     </label>
   );
@@ -151,7 +151,7 @@ export function NumberField({ label, value, onChange, min, max, step, hint, disa
 
 function FieldLabel({ label, required }: { label: string; required?: boolean | undefined }): ReactElement {
   return (
-    <span className="text-xs font-medium text-gray-600 dark:text-zinc-400">
+    <span className="text-xs font-medium text-gray-700 dark:text-zinc-300">
       {label}
       {required && <span className="ml-0.5 text-red-500">*</span>}
     </span>

@@ -106,7 +106,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
 
   return (
     <section>
-      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400 mb-4">
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-4">
         Recommendations{" "}
         <span className="ml-1 text-gray-400 dark:text-zinc-500 font-normal normal-case tracking-normal">({value.length})</span>
       </h2>

@@ -36,11 +36,12 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
   return (
     <section onFocus={onFocus}>
       <div className="flex items-center gap-3 mb-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-zinc-400">Header</h2>
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-zinc-300">Header</h2>
         <button
           type="button"
           role="switch"
           aria-checked={showHeader}
+          aria-label="Show header section"
           onClick={() => onShowHeaderChange(!showHeader)}
           className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors duration-200 focus:outline-none ${
             showHeader ? "bg-blue-500" : "bg-gray-300"
@@ -77,6 +78,7 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
               <div key={index} className="flex items-center gap-2">
                 <input
                   type="text"
+                  aria-label={`Link ${index + 1} label`}
                   placeholder="Label"
                   value={link.label}
                   onChange={(e) => setLink(index, "label", e.target.value)}
@@ -84,6 +86,7 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
                 />
                 <input
                   type="text"
+                  aria-label={`Link ${index + 1} URL`}
                   placeholder="URL"
                   value={link.url}
                   onChange={(e) => setLink(index, "url", e.target.value)}
@@ -92,7 +95,7 @@ export function HeaderForm({ author, showHeader, onAuthorChange, onShowHeaderCha
                 <button
                   type="button"
                   onClick={() => removeLink(index)}
-                  title="Remove link"
+                  aria-label={`Remove link ${index + 1}`}
                   className="shrink-0 p-1.5 text-gray-300 hover:text-red-500 transition-colors"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

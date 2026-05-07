@@ -96,6 +96,7 @@ export function TestimonialCard({ testimonial, p, active, collapsed }: { testimo
       <div
         className="relative overflow-hidden"
         style={{
+          minHeight: isCollapsible ? COLLAPSED_TEXT_HEIGHT : undefined,
           maxHeight,
           transition: isCollapsible ? 'max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)' : undefined,
         }}

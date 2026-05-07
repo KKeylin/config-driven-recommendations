@@ -18,7 +18,7 @@ export function Field({ label, value, onChange, hint, required }: FieldProps): R
         onChange={(e) => onChange(e.target.value)}
         className="rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100 dark:focus:border-blue-400"
       />
-      {hint && <span className="text-xs text-gray-400 dark:text-zinc-500">{hint}</span>}
+      {hint && <span className="text-xs text-gray-400 dark:text-zinc-400">{hint}</span>}
     </label>
   );
 }
@@ -111,7 +111,7 @@ export function ColorField({ label, value, onChange, hint, disabled }: ColorFiel
           </button>
         )}
       </div>
-      {hint && <span className="text-xs text-gray-400 dark:text-zinc-500">{hint}</span>}
+      {hint && <span className="text-xs text-gray-400 dark:text-zinc-400">{hint}</span>}
     </div>
   );
 }
@@ -144,7 +144,7 @@ export function NumberField({ label, value, onChange, min, max, step, hint, disa
         }}
         className="rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100 dark:focus:border-blue-400 disabled:cursor-not-allowed"
       />
-      {hint && <span className="text-xs text-gray-400 dark:text-zinc-500">{hint}</span>}
+      {hint && <span className="text-xs text-gray-400 dark:text-zinc-400">{hint}</span>}
     </label>
   );
 }

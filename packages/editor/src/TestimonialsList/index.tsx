@@ -108,7 +108,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
     <section>
       <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-700 dark:text-zinc-300 mb-4">
         Recommendations{" "}
-        <span className="ml-1 text-gray-400 dark:text-zinc-500 font-normal normal-case tracking-normal">({value.length})</span>
+        <span className="ml-1 text-gray-400 dark:text-zinc-400 font-normal normal-case tracking-normal">({value.length})</span>
       </h2>
       <div className="flex flex-col gap-2">
         {value.map((testimonial, index) => {
@@ -182,7 +182,7 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
                     </span>
                     <div className="flex flex-col gap-0.5 min-w-0 flex-1 ml-3">
                       <span className="text-sm font-medium text-gray-800 dark:text-zinc-200 truncate">
-                        {testimonial.author.name || <span className="text-gray-400 dark:text-zinc-500 italic">Unnamed</span>}
+                        {testimonial.author.name || <span className="text-gray-400 dark:text-zinc-400 italic">Unnamed</span>}
                       </span>
                       <span className="text-xs text-gray-500 dark:text-zinc-400 truncate">
                         {testimonial.associatedRole.company || "—"} · {testimonial.date || "—"}

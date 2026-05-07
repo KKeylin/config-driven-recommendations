@@ -85,6 +85,7 @@ export function ColorField({ label, value, onChange, hint, disabled }: ColorFiel
       <div className="flex items-center gap-2">
         <input
           type="color"
+          aria-label={`${label} — color picker`}
           value={value || '#000000'}
           onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
@@ -92,6 +93,7 @@ export function ColorField({ label, value, onChange, hint, disabled }: ColorFiel
         />
         <input
           type="text"
+          aria-label={`${label} — hex value`}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="e.g. #3b82f6"
@@ -102,6 +104,7 @@ export function ColorField({ label, value, onChange, hint, disabled }: ColorFiel
           <button
             type="button"
             onClick={() => onChange('')}
+            aria-label={`Clear ${label}`}
             className="text-xs text-gray-400 hover:text-gray-600"
           >
             Clear
@@ -126,7 +129,7 @@ interface NumberFieldProps {
 
 export function NumberField({ label, value, onChange, min, max, step, hint, disabled }: NumberFieldProps): ReactElement {
   return (
-    <div className={`flex flex-col gap-1 ${disabled ? 'opacity-40 pointer-events-none' : ''}`}>
+    <label className={`flex flex-col gap-1 ${disabled ? 'opacity-40 pointer-events-none' : ''}`}>
       <FieldLabel label={label} />
       <input
         type="number"
@@ -142,7 +145,7 @@ export function NumberField({ label, value, onChange, min, max, step, hint, disa
         className="rounded-md border border-gray-300 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 dark:bg-zinc-800 dark:border-zinc-600 dark:text-zinc-100 dark:focus:border-blue-400 disabled:cursor-not-allowed"
       />
       {hint && <span className="text-xs text-gray-400 dark:text-zinc-500">{hint}</span>}
-    </div>
+    </label>
   );
 }
 

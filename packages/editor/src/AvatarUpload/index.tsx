@@ -120,6 +120,7 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
           <button
             type="button"
             onClick={() => setShowUrlField((v) => !v)}
+            aria-expanded={showUrlField}
             className="text-xs text-gray-400 hover:text-gray-600 transition-colors text-left"
           >
             {showUrlField ? "Hide URL field" : "Or enter URL"}
@@ -130,6 +131,7 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
           ref={inputRef}
           type="file"
           accept="image/*"
+          aria-label="Upload avatar image"
           className="hidden"
           onChange={handleFileChange}
         />
@@ -138,6 +140,7 @@ export function AvatarUpload({ value, name, onChange }: AvatarUploadProps): Reac
       {showUrlField && (
         <input
           type="text"
+          aria-label="Avatar image URL"
           placeholder="https://... or data:image/..."
           value={typeof value === "string" && value.startsWith("http") ? value : ""}
           onChange={(e) => onChange(e.target.value || undefined)}

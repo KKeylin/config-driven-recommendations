@@ -173,6 +173,8 @@ export function TestimonialsList({ value, onChange, showValidation = false, onOp
                   <button
                     type="button"
                     onClick={() => toggle(testimonial.id)}
+                    aria-expanded={isOpen}
+                    aria-label={`${testimonial.author.name || 'Unnamed'} — toggle recommendation details`}
                     className="flex-1 flex items-center text-left hover:brightness-95 transition-all px-3 py-3 min-w-0"
                   >
                     <span className="text-3xl font-bold text-gray-200 dark:text-zinc-700 w-10 shrink-0 leading-none select-none">

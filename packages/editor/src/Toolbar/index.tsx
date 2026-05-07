@@ -82,6 +82,7 @@ function ToolbarButton({ active, onClick, children }: ToolbarButtonProps): React
     <button
       type="button"
       onClick={onClick}
+      aria-expanded={active}
       className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
         active
           ? "bg-slate-600 text-white"

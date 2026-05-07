@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import type { ThemeConfig } from "@config-driven-testimonials/config-schema";
-import { Select, ColorField } from "../ui/fields.js";
+import { Select, ColorField, NumberField } from "../ui/fields.js";
 
 export interface ThemeFormProps {
   value: ThemeConfig | undefined;
@@ -28,6 +28,7 @@ export function ThemeForm({ value, onChange }: ThemeFormProps): ReactElement {
   const theme = value ?? DEFAULT_THEME;
   const colorScheme = theme.colorScheme ?? "auto";
   const isAuto = colorScheme === "auto";
+  const isCarousel = (theme.variant ?? "cards") === "carousel";
 
   function handleColorSchemeChange(v: NonNullable<ThemeConfig["colorScheme"]>): void {
     const next = { ...theme, colorScheme: v };
@@ -65,6 +66,21 @@ export function ThemeForm({ value, onChange }: ThemeFormProps): ReactElement {
             onChange(next);
           }}
           hint="Applied to name and profile links."
+        />
+        <NumberField
+          label="Carousel duration (ms)"
+          value={theme.carouselInterval}
+          onChange={(v) => {
+            const next = { ...theme };
+            if (v !== undefined) next.carouselInterval = v;
+            else delete next.carouselInterval;
+            onChange(next);
+          }}
+          min={1}
+          max={60000}
+          step={500}
+          hint={isCarousel ? "Auto-advance interval. Default: 5000 ms." : "Only applies to carousel variant."}
+          disabled={!isCarousel}
         />
         <ColorField
           label="Background color"

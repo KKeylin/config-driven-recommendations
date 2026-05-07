@@ -33,19 +33,40 @@ jobs:
         run: pnpm build
 
       - name: Publish config-schema
-        run: pnpm publish --access public --no-git-checks
         working-directory: packages/config-schema
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "$NAME@$VERSION already published, skipping."
+          else
+            pnpm publish --access public --no-git-checks
+          fi
 
       - name: Publish core
-        run: pnpm publish --access public --no-git-checks
         working-directory: packages/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "$NAME@$VERSION already published, skipping."
+          else
+            pnpm publish --access public --no-git-checks
+          fi
 
       - name: Publish editor
-        run: pnpm publish --access public --no-git-checks
         working-directory: packages/editor
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          NAME=$(node -p "require('./package.json').name")
+          if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+            echo "$NAME@$VERSION already published, skipping."
+          else
+            pnpm publish --access public --no-git-checks
+          fi

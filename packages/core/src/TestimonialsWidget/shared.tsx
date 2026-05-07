@@ -67,8 +67,8 @@ export function Avatar({ name, avatarUrl, p }: { name?: string; avatarUrl?: stri
   );
 }
 
-// 3 lines × leading-7 (1.75rem per line)
-const COLLAPSED_TEXT_HEIGHT = '5.25rem';
+// 5 lines × leading-7 (1.75rem per line)
+const COLLAPSED_TEXT_HEIGHT = '8.75rem';
 
 export function TestimonialCard({ testimonial, p, active, collapsed }: { testimonial: Testimonial; p: string; active?: boolean; collapsed?: boolean }): React.ReactElement {
   const textRef = useRef<HTMLParagraphElement>(null);

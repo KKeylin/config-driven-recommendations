@@ -104,10 +104,24 @@ describe('TestimonialsWidget', () => {
     expect(screen.getByText('LinkedIn ↗')).toBeDefined();
   });
 
+  it('applies accentColor style to LinkedIn link', () => {
+    const c = { ...config, author: { ...config.author, linkedinUrl: 'https://linkedin.com/in/test' }, theme: { accentColor: '#ff0000' } };
+    render(<TestimonialsWidget config={c} />);
+    const link = screen.getByText('LinkedIn ↗').closest('a') as HTMLElement;
+    expect(link?.style.color).toBeTruthy();
+  });
+
   it('renders custom links when author.links provided', () => {
     const c = { ...config, author: { ...config.author, links: [{ label: 'GitHub', url: 'https://github.com/test' }] } };
     render(<TestimonialsWidget config={c} />);
     expect(screen.getByText('GitHub ↗')).toBeDefined();
+  });
+
+  it('applies accentColor style to custom links', () => {
+    const c = { ...config, author: { ...config.author, links: [{ label: 'GitHub', url: 'https://github.com/test' }] }, theme: { accentColor: '#ff0000' } };
+    render(<TestimonialsWidget config={c} />);
+    const link = screen.getByText('GitHub ↗').closest('a') as HTMLElement;
+    expect(link?.style.color).toBeTruthy();
   });
 
   it('hides header when showHeader is false', () => {

@@ -244,6 +244,19 @@ describe('TestimonialCard', () => {
     expect(links.length).toBeGreaterThan(0);
   });
 
+  it('renders avatar without LinkedIn wrapper when no author linkedinUrl', () => {
+    const t = { ...testimonial, author: { title: 'Engineer' } };
+    render(<TestimonialCard testimonial={t} p="t" />);
+    expect(screen.queryByRole('link', { name: /LinkedIn profile/ })).toBeNull();
+  });
+
+  it('uses fallback source aria-label when author has no name', () => {
+    const t = { ...testimonial, author: { linkedinUrl: 'https://linkedin.com/in/anon' } };
+    render(<TestimonialCard testimonial={t} p="t" />);
+    const link = screen.getByRole('link', { name: /Source of recommendation/ });
+    expect(link).toBeDefined();
+  });
+
   it('renders currentRole when present', () => {
     const t = { ...testimonial, author: { ...testimonial.author, currentRole: { title: 'VP Eng', company: 'BigCo' } } };
     render(<TestimonialCard testimonial={t} p="t" />);
@@ -282,7 +295,7 @@ describe('TestimonialCard', () => {
   it('applies maxHeight style when collapsed=true', () => {
     const { container } = render(<TestimonialCard testimonial={testimonial} p="t" collapsed={true} />);
     const wrapper = container.querySelector('.relative.overflow-hidden') as HTMLElement;
-    expect(wrapper?.style.maxHeight).toBe('5.25rem');
+    expect(wrapper?.style.maxHeight).toBe('8.75rem');
   });
 
   it('does not apply transition style when collapsed is undefined', () => {

@@ -48,10 +48,12 @@ export function CarouselView({ testimonials, p, interval = 5000 }: {
   const [isActiveHovered, setIsActiveHovered] = useState(false);
   const [isUserPaused, setIsUserPaused] = useState(false);
   const [canHover, setCanHover] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
   const isPaused = useRef(false);
   const isAnimating = useRef(false);
   const isVisible = useRef(true);
   const touchStartX = useRef<number | null>(null);
+  const mouseStartX = useRef<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const total = testimonials.length;
 
@@ -97,6 +99,30 @@ export function CarouselView({ testimonials, p, interval = 5000 }: {
     advance(delta < 0 ? (activeIndex + 1) % total : (activeIndex - 1 + total) % total);
   }
 
+  function handleMouseDown(e: React.MouseEvent): void {
+    if ((e.target as HTMLElement).closest('button')) return;
+    mouseStartX.current = e.clientX;
+    setIsDragging(true);
+  }
+
+  function commitMouseDrag(clientX: number): void {
+    if (mouseStartX.current === null) return;
+    const delta = clientX - mouseStartX.current;
+    mouseStartX.current = null;
+    setIsDragging(false);
+    if (Math.abs(delta) < 50) return;
+    advance(delta < 0 ? (activeIndex + 1) % total : (activeIndex - 1 + total) % total);
+  }
+
+  function handleMouseUp(e: React.MouseEvent): void {
+    commitMouseDrag(e.clientX);
+  }
+
+  function handleMouseLeaveContainer(e: React.MouseEvent): void {
+    commitMouseDrag(e.clientX);
+    if (!isUserPaused) isPaused.current = false;
+  }
+
   function togglePause(): void {
     const next = !isUserPaused;
     setIsUserPaused(next);
@@ -117,9 +143,12 @@ export function CarouselView({ testimonials, p, interval = 5000 }: {
       ref={containerRef}
       role="region"
       aria-label="Testimonials carousel"
-      className={`${p}-carousel pb-4`}
+      className={`${p}-carousel pb-4 select-none`}
+      style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
       onMouseEnter={() => { if (!isUserPaused) isPaused.current = true; }}
-      onMouseLeave={() => { if (!isUserPaused) isPaused.current = false; }}
+      onMouseLeave={handleMouseLeaveContainer}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >

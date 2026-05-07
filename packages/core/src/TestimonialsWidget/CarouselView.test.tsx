@@ -83,4 +83,55 @@ describe('CarouselView', () => {
     expect(nextActive).not.toBe(initialActive);
     vi.useRealTimers();
   });
+
+  describe('mouse drag navigation', () => {
+    it('drag left (> 50px) advances to next slide', () => {
+      render(<CarouselView testimonials={testimonials} p="t" />);
+      const region = screen.getByRole('region', { name: /carousel/i });
+      const nav = screen.getByRole('tablist');
+
+      fireEvent.mouseDown(region, { clientX: 200 });
+      fireEvent.mouseUp(region, { clientX: 50 });
+
+      const active = nav.querySelector('[aria-selected="true"]');
+      expect(active?.getAttribute('aria-label')).toContain('Slide 2');
+    });
+
+    it('drag right (> 50px) goes to previous slide (wraps around)', () => {
+      render(<CarouselView testimonials={testimonials} p="t" />);
+      const region = screen.getByRole('region', { name: /carousel/i });
+      const nav = screen.getByRole('tablist');
+
+      fireEvent.mouseDown(region, { clientX: 50 });
+      fireEvent.mouseUp(region, { clientX: 200 });
+
+      const active = nav.querySelector('[aria-selected="true"]');
+      expect(active?.getAttribute('aria-label')).toContain('Slide 3');
+    });
+
+    it('small drag (< 50px) does not change slide', () => {
+      render(<CarouselView testimonials={testimonials} p="t" />);
+      const region = screen.getByRole('region', { name: /carousel/i });
+      const nav = screen.getByRole('tablist');
+
+      fireEvent.mouseDown(region, { clientX: 200 });
+      fireEvent.mouseUp(region, { clientX: 170 });
+
+      const active = nav.querySelector('[aria-selected="true"]');
+      expect(active?.getAttribute('aria-label')).toContain('Slide 1');
+    });
+
+    it('drag started on a button does not navigate', () => {
+      render(<CarouselView testimonials={testimonials} p="t" />);
+      const region = screen.getByRole('region', { name: /carousel/i });
+      const pauseBtn = screen.getByRole('button', { name: /pause carousel/i });
+      const nav = screen.getByRole('tablist');
+
+      fireEvent.mouseDown(pauseBtn, { clientX: 200 });
+      fireEvent.mouseUp(region, { clientX: 50 });
+
+      const active = nav.querySelector('[aria-selected="true"]');
+      expect(active?.getAttribute('aria-label')).toContain('Slide 1');
+    });
+  });
 });

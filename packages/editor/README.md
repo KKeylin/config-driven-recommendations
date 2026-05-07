@@ -14,6 +14,7 @@ Fill in your testimonials, upload avatars, tweak the theme — then export a sin
 [![npm](https://img.shields.io/npm/v/@config-driven-testimonials/editor)](https://www.npmjs.com/package/@config-driven-testimonials/editor)
 [![license](https://img.shields.io/npm/l/@config-driven-testimonials/editor)](./LICENSE)
 ![WCAG 2.2 AAA](https://img.shields.io/badge/WCAG_2.2-AAA_100%2F100-brightgreen)
+![Lighthouse](https://img.shields.io/badge/Lighthouse-99%2F100-brightgreen?logo=lighthouse&logoColor=white)
 
 ---
 
